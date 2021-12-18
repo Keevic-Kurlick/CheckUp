@@ -11286,3 +11286,16 @@ textarea.form-control-lg {
     display: none !important;
   }
 }
+#under-header-menu ul {
+  padding-left: 0;
+  list-style-type: none;
+  display: flex;
+}
+
+#under-header-menu ul > li {
+  list-style-type: none;
+}
+
+#under-header-menu ul > li:not(:first-child) {
+  margin-left: 1rem;
+}
