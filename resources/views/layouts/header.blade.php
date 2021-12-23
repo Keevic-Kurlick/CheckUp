@@ -1,54 +1,73 @@
 <header>
-    <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+    <nav class="navbar navbar-expand-md d-block navbar-light bg-white shadow-sm">
         <div class="container">
-            <a class="navbar-brand" href="{{ url('/') }}">
-                {{ config('app.name', 'Laravel') }}
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+            <div class="col-9">
+                <div class="row">
+                    <div class="col-12 col-md-5 col-lg-4">
+                        <a class="navbar-brand" href="/">
+                            <img src="{{ asset('storage/Logos/Logo.svg') }}" alt="CheckUp" height="65">
+                        </a>
+                    </div>
+                    <div class="col-12 col-md-7 logo-text-block">
+                        <span class = "logo-text">Оформление медицинских справок</span>
+                    </div>
+                </div>
+            </div>
 
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <!-- Left Side Of Navbar -->
-                <ul class="navbar-nav me-auto">
+            <div class="col-3">
+                <div class="nav justify-content-end">
+                    <ul class="navbar-nav ms-auto">
+                        <!-- Authentication Links -->
+                        @guest
 
-                </ul>
+                            @if (Route::has('login'))
+                                <li class="nav-item authentication-links">
+                                    <a class="btn btn-success" href="{{ route('login') }}">{{ __('Войти') }}</a>
+                                </li>
+                            @endif
 
-                <!-- Right Side Of Navbar -->
-                <ul class="navbar-nav ms-auto">
-                    <!-- Authentication Links -->
-                    @guest
-                        @if (Route::has('login'))
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                            </li>
-                        @endif
+                            @if (Route::has('register'))
+                                <li class="nav-item authentication-links">
+                                    <a class="btn btn-success" id = "reg-btn" href="{{ route('register') }}">{{ __('Регистрация') }}</a>
+                                </li>
+                            @endif
 
-                        @if (Route::has('register'))
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                            </li>
-                        @endif
-                    @else
-                        <li class="nav-item dropdown">
-                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                {{ Auth::user()->name }}
-                            </a>
-
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="{{ route('logout') }}"
-                                   onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                    {{ __('Logout') }}
+                            <li class="nav-item dropdown authentication-links-mobile">
+                                <a class="dropdown-toggle navbar-dark btn btn-success navbar-toggler" href="#" id="dropdownHeader" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <span class="navbar-toggler-icon"></span>
                                 </a>
-
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                    @csrf
-                                </form>
-                            </div>
-                        </li>
-                    @endguest
-                </ul>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownHeader">
+                                    @if (Route::has('login'))
+                                        <a class="dropdown-item" href="{{ route('login') }}">{{ __('Войти') }}</a>
+                                    @endif
+                                    @if (Route::has('register'))
+                                        <a class="dropdown-item" href="{{ route('register') }}">{{ __('Регистрация') }}</a>
+                                    @endif
+                                </ul>
+                            </li>
+                        @else
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    {{ Auth::user()->name }}
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <li><a class="dropdown-item" href="#">Заказы</a></li>
+                                    <li><a class="dropdown-item" href="#">Документы</a></li>
+                                    <li><a class="dropdown-item" href="#">Настройка</a></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                         document.getElementById('logout-form').submit();">
+                                        Выйти
+                                    </a>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                        @csrf
+                                    </form>
+                                </ul>
+                            </li>
+                        @endguest
+                    </ul>
+                </div>
             </div>
         </div>
     </nav>

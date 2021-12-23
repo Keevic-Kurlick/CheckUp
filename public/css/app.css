@@ -11287,6 +11287,7 @@ textarea.form-control-lg {
   }
 }
 #under-header-menu ul {
+  margin-left: 10px;
   padding-left: 0;
   list-style-type: none;
   display: flex;
@@ -11298,4 +11299,79 @@ textarea.form-control-lg {
 
 #under-header-menu ul > li:not(:first-child) {
   margin-left: 1rem;
+}
+
+header {
+  background: white;
+}
+header .logo-text-block .logo-text {
+  font-weight: 900;
+  color: #9e9e9e;
+}
+header .logo-text-block {
+  display: flex;
+  align-items: end;
+}
+header .navbar-brand {
+  font-size: 24px;
+}
+header .navbar-nav .btn {
+  background-color: #00C98D;
+  font-weight: 900;
+  color: white;
+  outline: auto;
+  outline-color: #00C98D;
+  outline-style: wave;
+}
+header #reg-btn {
+  margin-left: 10px;
+}
+header .navbar-nav {
+  justify-content: end;
+}
+header .navbar-nav .nav-item a {
+  text-align: end;
+}
+header .navbar-brand {
+  font-size: 20px;
+}
+header .collapse .navbar-collapse ul > li {
+  list-style-type: none;
+}
+header .dropdown-menu ul > li {
+  list-style-type: none;
+  display: inline;
+}
+header .logo-text-block {
+  display: flex;
+  align-items: end;
+  padding-bottom: 0.8rem;
+  color: #6c757d;
+}
+header .dropdown-toggle::after {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .authentication-links-mobile {
+    display: none;
+  }
+
+  .authentication-links {
+    display: block;
+  }
+}
+@media (max-width: 768px) {
+  .authentication-links-mobile {
+    display: block;
+  }
+  .authentication-links-mobile .dropdown-menu {
+    position: absolute;
+    left: auto;
+    right: 0;
+  }
+
+  .authentication-links {
+    display: none;
+  }
 }
