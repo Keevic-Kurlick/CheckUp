@@ -49,9 +49,21 @@ header {
     list-style-type: none;
   }
 
-  .dropdown-menu ul > li {
-    list-style-type: none;
-    display: inline;
+
+  .navbar-nav .dropdown-menu {
+    position: absolute;
+  }
+
+  .dropdown {
+    .dropdown-menu {
+      right: 0;
+      left: auto;
+
+      ul > li {
+        list-style-type: none;
+        display: inline;
+      }
+    }
   }
 
   .logo-text-block {
@@ -64,7 +76,6 @@ header {
   .dropdown-toggle::after {
     display: none;
   }
-
 }
 
 @media (min-width: 768px){
@@ -80,12 +91,6 @@ header {
 @media (max-width: 768px){
   .authentication-links-mobile {
     display: block;
-
-    .dropdown-menu {
-      position: absolute;
-      left: auto;
-      right: 0;
-    }
   }
 
   .authentication-links {

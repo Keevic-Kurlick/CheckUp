@@ -3,10 +3,12 @@
     padding-left: 0;
     list-style-type: none;
     display: flex;
+    text-decoration: none;
 }
 
 #under-header-menu ul > li {
     list-style-type: none;
+    color: black;
 }
 
 #under-header-menu ul > li:not(:first-child) {

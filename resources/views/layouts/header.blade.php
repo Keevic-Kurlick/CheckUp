@@ -47,8 +47,12 @@
                             </li>
                         @else
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    {{ Auth::user()->name }}
+                                <a style = "font-size: 16px; font-weight: bolder" class="nav-link dropdown-toggle"
+                                   href="#" id="navbarDropdown"
+                                   role="button"
+                                   data-bs-toggle="dropdown"
+                                   aria-expanded="false">
+                                    <img src="{{ asset('storage/Logos/home.svg') }}" alt="Кабинет" height="35">
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <li><a class="dropdown-item" href="#">Заказы</a></li>

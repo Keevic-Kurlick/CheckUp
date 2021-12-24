@@ -11,3 +11,50 @@
 @import "layouts/menu";
 
 @import "layouts/header";
+
+@import "layouts/footer";
+
+//Styles of menu section
+
+@import "layouts/menu/about";
+
+@import "layouts/menu/services";
+
+//Styles of User profile
+
+@import "layouts/profile/documents";
+
+@import "layouts/profile/order";
+
+@import "layouts/profile/settings";
+
+* {
+   margin: 0;
+   padding: 0;
+}
+
+html,
+body {
+   height: 100%;
+}
+
+#app {
+   position: relative;
+   height: 100%;
+}
+
+#wrapper {
+   display: flex;
+   flex-direction: column;
+   padding: 0;
+   justify-content: space-between;
+   height: 100%;
+}
+
+.content {
+   flex: 1 0 auto;
+}
+
+.footer {
+   flex: 0 0 auto;
+}

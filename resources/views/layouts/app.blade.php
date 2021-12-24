@@ -25,11 +25,14 @@
         @include('layouts.header')
         @include('layouts.menu')
 
-        <main class="py-4">
-            @yield('content')
-        </main>
+        <div id="wrapper">
+            <main class="py-4">
+                @yield('content')
+            </main>
 
-        @include('layouts.footer')
+            @include('layouts.footer')
+        </div>
+
     </div>
 </body>
 </html>

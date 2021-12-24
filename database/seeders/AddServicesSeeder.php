@@ -31,8 +31,6 @@ class AddServicesSeeder extends Seeder
                     'price'         => 600
                 ],
             ],
-        ];
-        $forCreate = [
             [
                 'med_sert' => [
                     'name'          => 'Справка 086/у',
@@ -48,8 +46,6 @@ class AddServicesSeeder extends Seeder
                     'price'         => 500
                 ],
             ],
-        ];
-        $forCreate = [
             [
                 'med_sert' => [
                     'name'          => 'Справка 003-В/у',
@@ -63,8 +59,6 @@ class AddServicesSeeder extends Seeder
                     'price'         => 800
                 ],
             ],
-        ];
-        $forCreate = [
             [
                 'med_sert' => [
                     'name'          => 'Справка №079/у',
@@ -79,6 +73,7 @@ class AddServicesSeeder extends Seeder
                 ],
             ],
         ];
+
         $this->createServices($forCreate);
 
         DB::commit();

@@ -11291,10 +11291,12 @@ textarea.form-control-lg {
   padding-left: 0;
   list-style-type: none;
   display: flex;
+  text-decoration: none;
 }
 
 #under-header-menu ul > li {
   list-style-type: none;
+  color: black;
 }
 
 #under-header-menu ul > li:not(:first-child) {
@@ -11303,6 +11305,9 @@ textarea.form-control-lg {
 
 header {
   background: white;
+}
+header .logo-text-block {
+  font-size: 18px;
 }
 header .logo-text-block .logo-text {
   font-weight: 900;
@@ -11338,7 +11343,14 @@ header .navbar-brand {
 header .collapse .navbar-collapse ul > li {
   list-style-type: none;
 }
-header .dropdown-menu ul > li {
+header .navbar-nav .dropdown-menu {
+  position: absolute;
+}
+header .dropdown .dropdown-menu {
+  right: 0;
+  left: auto;
+}
+header .dropdown .dropdown-menu ul > li {
   list-style-type: none;
   display: inline;
 }
@@ -11365,13 +11377,55 @@ header .dropdown-toggle::after {
   .authentication-links-mobile {
     display: block;
   }
-  .authentication-links-mobile .dropdown-menu {
-    position: absolute;
-    left: auto;
-    right: 0;
-  }
 
   .authentication-links {
     display: none;
   }
+}
+footer {
+  background-color: #00866E;
+  color: white;
+  padding-top: 1rem;
+}
+footer .container {
+  justify-content: space-between;
+  place-content: stretch;
+}
+footer .container .row .col-md-6 .under-logo {
+  height: 30px;
+}
+footer .container .row .col-md-6 .list-unstyled ul > li .a {
+  color: white !important;
+  text-decoration: none;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+#app {
+  position: relative;
+  height: 100%;
+}
+
+#wrapper {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.content {
+  flex: 1 0 auto;
+}
+
+.footer {
+  flex: 0 0 auto;
 }

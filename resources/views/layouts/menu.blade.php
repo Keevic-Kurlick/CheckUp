@@ -2,10 +2,10 @@
     <div id="under-header-menu">
         <ul>
             <li>
-                <a href="{{ route('servicesList') }}">Услуги</a>
+                <a style="color:#848484; font-stretch: expanded; font-size: 18px; font-weight: bolder" href="{{ route('servicesList') }}">Услуги</a>
             </li>
             <li>
-                <a href="{{ route('main') }}">О нас</a>
+                <a style="color:#848484; font-stretch: expanded; font-size: 18px; font-weight: bolder" href="{{ route('main') }}">О нас</a>
             </li>
         </ul>
     </div>

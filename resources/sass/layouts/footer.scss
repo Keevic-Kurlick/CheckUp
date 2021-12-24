@@ -1,37 +1,28 @@
+
 footer {
   background-color: #00866E;
-  width: 100%;
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  height: 200px;
   color: white;
-  padding-top:1.5rem !important;
-  margin-bottom: 0;
+  padding-top: 1rem;
 
- .container {
-   background-color: #00866E;
-   justify-content:space-between;
-   place-content: stretch;
-   font-size: 18px;
+  .container {
+    justify-content: space-between;
+    place-content: stretch;
 
-  .row {
-    .col-md-6 {
-      font-size: 18px;
-      .under-logo {
-        height: 35px;
-      }
-      .list-unstyled ul>li {
-        .a {
+    .row {
+      .col-md-6 {
+
+        .under-logo {
+          height: 30px;
+        }
+
+        .list-unstyled ul > li {
+          .a {
             color: white !important;
             text-decoration: none;
           }
         }
       }
-    .col-md-3 {
-      font-size: 18px;
-      }
-      }
     }
-   }
+  }
+}
 

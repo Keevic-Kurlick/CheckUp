@@ -21,5 +21,5 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/services', [\App\Http\Controllers\Menu\ServicesController::class, 'servicesList'])
+Route::get('/services', [App\Http\Controllers\Menu\ServicesController::class, 'servicesList'])
     ->name('servicesList');

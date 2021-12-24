@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}</div>
+                <div class="card-header" style="font-size: 18px; text-align: center; background-color: #00866E; color: white; font-weight: bolder;">{{ __('Добро пожаловать!') }}</div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -14,7 +14,7 @@
                         </div>
                     @endif
 
-                    {{ __('You are logged in!') }}
+                    {{ __('Вы авторизованы! Теперь вы можете заказывать справки, отслеживать статусы заказов, добавлять и изменять документы в личном кабинете.') }}
                 </div>
             </div>
         </div>
