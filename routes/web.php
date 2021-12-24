@@ -23,3 +23,13 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::get('/services', [App\Http\Controllers\Menu\ServicesController::class, 'servicesList'])
     ->name('servicesList');
+
+Route::get('/orders', [\App\Http\Controllers\Profile\OrdersController::class, 'ordersList'])
+    ->name('ordersList');
+
+Route::get('/settings', [\App\Http\Controllers\Profile\SettingsController::class, 'settings'])
+    ->name('settings');
+
+Route::get('/documents', [\App\Http\Controllers\Profile\DocumentsController::class, 'profileDocuments'])
+    ->name('profileDocuments');
+

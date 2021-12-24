@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 
 class SettingsController extends Controller
 {
-    public function settingsSet()
+    public function settings()
     {
         return view('layouts.profile.settings');
     }
