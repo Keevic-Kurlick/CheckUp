@@ -5,6 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @property string $name
+ * @property string $description
+ * @property int    $price
+ * @property int    $medical_certificate
+ * @method static string whereName()
+ * @method static string whereDescription()
+ * @method static string wherePrice()
+ */
 class Service extends Model
 {
     use HasFactory;
