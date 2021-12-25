@@ -6,10 +6,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
+ * @property int $id
  * @property string $name
  * @property string $description
  * @property int    $price
  * @property int    $medical_certificate
+ * @method static string whereId()
  * @method static string whereName()
  * @method static string whereDescription()
  * @method static string wherePrice()

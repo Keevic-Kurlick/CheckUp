@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Profile\OrdersController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,15 +22,19 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/services', [App\Http\Controllers\Menu\ServicesController::class, 'servicesList'])
-    ->name('servicesList');
+Route::get('/menu/services', [App\Http\Controllers\Menu\ServicesController::class, 'servicesList'])
+    ->name('menu.services.list');
 
-Route::get('/orders', [\App\Http\Controllers\Profile\OrdersController::class, 'ordersList'])
-    ->name('ordersList');
+Route::middleware('auth')->get('/profile/orders', [OrdersController::class, 'ordersList'])
+    ->name('profile.orders.list');
 
-Route::get('/settings', [\App\Http\Controllers\Profile\SettingsController::class, 'settings'])
-    ->name('settings');
+Route::middleware('auth')->post('/menu/orders/create', [\App\Http\Controllers\Menu\OrdersController::class, 'store'])
+    ->name('menu.orders.store');
 
-Route::get('/documents', [\App\Http\Controllers\Profile\DocumentsController::class, 'profileDocuments'])
-    ->name('profileDocuments');
+Route::middleware('auth')->get('/profile/settings', [\App\Http\Controllers\Profile\SettingsController::class, 'settings'])
+    ->name('profile.settings');
+
+Route::middleware('auth')->get('/profile/documents', [\App\Http\Controllers\Profile\DocumentsController::class, 'profileDocuments'])
+    ->name('profile.documents');
+
 

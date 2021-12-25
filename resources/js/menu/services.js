@@ -4,16 +4,18 @@ $(document).ready(function () {
     let services        = getServices();
 
     $orderButton.on('click', function (el) {
-        let $currentButton = $(el.currentTarget);
+        let $currentButton   = $(el.currentTarget);
         let serviceId        = $currentButton.data('service-id');
         let service          = getServiceById(serviceId, services);
 
-        let $modalTitle = $serviceModel.find('.modal-title');
-        let $modalBody  = $serviceModel.find('.modal-body')
+        let $modalTitle     = $serviceModel.find('.modal-title');
+        let $modalBody      = $serviceModel.find('.modal-body')
+        let $modalFooter    = $serviceModel.find('.modal-footer')
 
         $modalTitle.html(service.name);
         $modalBody.find('.service-description').html(service.description);
         $modalBody.find('#service-price').html(service.price + 'руб.');
+        $modalFooter.find('input[name="serviceId"]').val(serviceId);
     });
 
 });

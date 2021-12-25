@@ -55,9 +55,9 @@
                                     <img src="{{ asset('storage/Logos/home.svg') }}" alt="Кабинет" height="35">
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <li><a class="dropdown-item" href="{{ route('ordersList') }}">Заказы</a></li>
-                                    <li><a class="dropdown-item" href="{{ route('profileDocuments') }}">Документы</a></li>
-                                    <li><a class="dropdown-item" href="{{ route('settings') }}">Настройки</a></li>
+                                    <li><a class="dropdown-item" href="{{ route('profile.orders.list') }}">Заказы</a></li>
+                                    <li><a class="dropdown-item" href="{{ route('profile.documents') }}">Документы</a></li>
+                                    <li><a class="dropdown-item" href="{{ route('profile.settings') }}">Настройки</a></li>
                                     <li><hr class="dropdown-divider"></li>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();

@@ -66,9 +66,10 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <form action="">
-                        <input type="hidden" name="orderServiceId">
-                        <input type="button" class="btn btn-primary" value="Заказать">
+                    <form action="{{ route('menu.orders.store') }}" method="post">
+                        @csrf
+                        <input type="hidden" name="serviceId">
+                        <input type="submit" class="btn btn-primary" value="Заказать">
                     </form>
                 </div>
             </div>
