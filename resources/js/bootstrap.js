@@ -1,5 +1,6 @@
 window._ = require('lodash');
 window.$ = require('jquery');
+require('jquery-mask-plugin');
 
 try {
     require('bootstrap');

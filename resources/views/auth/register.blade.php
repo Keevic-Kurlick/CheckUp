@@ -63,7 +63,7 @@
                             </div>
 
                             <div class="row mb-0" style = "justify-content: center">
-                                <div class="col-md-6">
+                                <div class="col-md-6 d-flex justify-content-center">
                                     <button type="submit" class="btn btn-primary" style = "align-content: center; background-color:#00C98D; color:white; font-size: 18px; font-weight: bold">
                                         {{ __('Зарегистрироваться') }}
                                     </button>
