@@ -19,6 +19,14 @@ class Service extends Model
     use HasFactory;
 
     /**
+     * @var string[]
+     */
+    protected $dates = [
+        'created_at',
+        'updated_at',
+    ];
+
+    /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function orders(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
