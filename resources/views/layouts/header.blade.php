@@ -22,13 +22,13 @@
 
                             @if (Route::has('login'))
                                 <li class="nav-item authentication-links">
-                                    <a class="btn btn-success" href="{{ route('login') }}">{{ __('Войти') }}</a>
+                                    <a class="btn btn-primary" href="{{ route('login') }}">{{ __('Войти') }}</a>
                                 </li>
                             @endif
 
                             @if (Route::has('register'))
                                 <li class="nav-item authentication-links">
-                                    <a class="btn btn-success" id = "reg-btn" href="{{ route('register') }}">{{ __('Регистрация') }}</a>
+                                    <a class="btn btn-primary" id = "reg-btn" href="{{ route('register') }}">{{ __('Регистрация') }}</a>
                                 </li>
                             @endif
 

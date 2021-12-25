@@ -3,3 +3,12 @@
   padding-left: 5px;
   filter: invert(74%) sepia(26%) saturate(7418%) hue-rotate(116deg) brightness(91%) contrast(101%);
 }
+.container .card .card-button-block {
+  display: flex;
+  justify-content: center;
+}
+
+#servicesModal .modal-content .modal-footer {
+  display: flex;
+  justify-content: center;
+}

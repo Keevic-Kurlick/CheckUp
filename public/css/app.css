@@ -11324,9 +11324,6 @@ header .navbar-nav .btn {
   background-color: #00C98D;
   font-weight: 900;
   color: white;
-  outline: auto;
-  outline-color: #00C98D;
-  outline-style: wave;
 }
 header #reg-btn {
   margin-left: 10px;
@@ -11403,6 +11400,23 @@ footer .container .row .col-md-6 .list-unstyled ul > li .a {
   padding-top: 10px;
   padding-left: 5px;
   filter: invert(74%) sepia(26%) saturate(7418%) hue-rotate(116deg) brightness(91%) contrast(101%);
+}
+.container .card .card-button-block {
+  display: flex;
+  justify-content: center;
+}
+
+#servicesModal .modal-content .modal-footer {
+  display: flex;
+  justify-content: center;
+}
+
+.btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:focus, .btn-primary:focus-visible {
+  background-color: #00C98D;
+  border-color: #00C98D;
+  color: white;
+  font-weight: bold;
+  outline: none;
 }
 
 * {

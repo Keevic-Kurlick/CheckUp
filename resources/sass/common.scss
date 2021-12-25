@@ -1,0 +1,9 @@
+.btn-primary {
+    &, &:hover, &:active, &:focus, &:focus-visible {
+        background-color:#00C98D;
+        border-color: #00C98D;
+        color:white;
+        font-weight: bold;
+        outline: none;
+    }
+}
