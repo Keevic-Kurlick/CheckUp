@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
-@section('profile/settings')
+@section('content')
     <div class="container-fluid">
-        <p>HelloEveryone</p>
+        <p style="font-size: 30px;text-align: center">!Эта страница ещё в разработке!</p>
     </div>
 @endsection
