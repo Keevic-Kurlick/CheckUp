@@ -5,6 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @property string $passport_series
+ * @property string $passport_number
+ * @property string $inn
+ * @property string $snils
+ * @method static whereId(int $id)
+ */
 class Patient_information extends Model
 {
     use HasFactory;
@@ -15,6 +22,8 @@ class Patient_information extends Model
         'inn',
         'snils'
     ];
+
+    protected $table = 'patient_information';
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

@@ -37,4 +37,7 @@ Route::middleware('auth')->get('/profile/settings', [\App\Http\Controllers\Profi
 Route::middleware('auth')->get('/profile/documents', [\App\Http\Controllers\Profile\DocumentsController::class, 'profileDocuments'])
     ->name('profile.documents');
 
+Route::middleware('auth')->post('/profile/documents/store', [\App\Http\Controllers\Profile\DocumentsController::class, 'store'])
+    ->name('profile.documents.store');
+
 
