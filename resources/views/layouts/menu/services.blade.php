@@ -5,8 +5,6 @@
 */
 @endphp
 
-
-
 @extends('layouts.app')
 
 @section('css')
