@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\DB;
  * @property string $status
  * @property int $patient_id
  * @property int $service_id
+ * @method static wherePatientId(int $patientId)
  */
 class Order extends Model
 {

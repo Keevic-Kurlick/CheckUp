@@ -1,3 +1,9 @@
+@php
+/**
+ * @var \App\Models\Order[] $orders
+ */
+@endphp
+
 @extends ('layouts.app')
 
 @section('content')
@@ -13,12 +19,14 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>Оформление справки 003-в/у</td>
-                    <td>1000</td>
-                    <td>23.08.2022</td>
-                    <td>В работе</td>
-                </tr>
+                @foreach($orders as $order)
+                    <tr>
+                        <td>{{ $order['service_name'] }}</td>
+                        <td>{{ $order['service_price'] }}</td>
+                        <td>{{ $order['created_at'] }}</td>
+                        <td>{{ $order['status'] }}</td>
+                    </tr>
+                @endforeach
             </tbody>
         </table>
     </div>
