@@ -1,10 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container" style="height:100%; margin-bottom: 170px">
+    <div class="container about" style="">
         <div class="card text-center" style="width: 100%;">
             <div class="card-body">
-                <h5><img src= {{ asset('storage/logos/largelogo.svg') }}></h5>
+                <h5>
+                    <img src= {{ asset('storage/logos/largelogo.svg') }}>
+                </h5>
                 <h5 class="lead" style="font-size: 24px; color:#9e9e9e; font-weight: bold">Веб-сервис по оформлению
                     медицинских справок</h5>
                 <hr class="my-4">
