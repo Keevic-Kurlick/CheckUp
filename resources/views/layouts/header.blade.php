@@ -5,7 +5,7 @@
                 <div class="row">
                     <div class="col-12 col-md-5 col-lg-4">
                         <a class="navbar-brand" href="/">
-                            <img src="{{ asset('storage/Logos/Logo.svg') }}" alt="CheckUp" height="65">
+                            <img src="{{ asset('storage/logos/Logo.svg') }}" alt="CheckUp" height="65">
                         </a>
                     </div>
                     <div class="col-12 col-md-7 logo-text-block">
@@ -52,7 +52,7 @@
                                    role="button"
                                    data-bs-toggle="dropdown"
                                    aria-expanded="false">
-                                    <img src="{{ asset('storage/Logos/home.svg') }}" alt="Кабинет" height="35">
+                                    <img src="{{ asset('storage/logos/home.svg') }}" alt="Кабинет" height="35">
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <li><a class="dropdown-item" href="{{ route('profile.orders.list') }}">Заказы</a></li>

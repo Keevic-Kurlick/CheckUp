@@ -14,3 +14,27 @@
         }
     }
 }
+
+@media(min-width: 1400px) {
+    .documents {
+        width:60%;
+    }
+}
+
+@media(min-width: 992px) {
+    .documents {
+        width:70%;
+    }
+}
+
+@media(min-width: 768px) {
+    .documents {
+        width:80%;
+    }
+}
+
+@media(max-width: 768px) {
+    .documents {
+        width:100%;
+    }
+}
