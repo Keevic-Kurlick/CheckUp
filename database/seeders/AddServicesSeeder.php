@@ -16,7 +16,7 @@ class AddServicesSeeder extends Seeder
     {
         DB::beginTransaction();
 
-        $forCreate = [
+        $servicesInfo = [
             [
                 'med_sert' => [
                     'name'          => 'Справка для бассейна',
@@ -87,7 +87,7 @@ class AddServicesSeeder extends Seeder
             ],
         ];
 
-        $this->createServices($forCreate);
+        $this->createServices($servicesInfo);
 
         DB::commit();
     }
