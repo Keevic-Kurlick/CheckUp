@@ -7016,7 +7016,7 @@
      * @method static \Illuminate\Http\Client\PendingRequest stub(callable $callback)
      * @method static \Illuminate\Http\Client\PendingRequest timeout(int $seconds)
      * @method static \Illuminate\Http\Client\PendingRequest withBasicAuth(string $username, string $password)
-     * @method static \Illuminate\Http\Client\PendingRequest withBody(resource|string $menu, string $contentType)
+     * @method static \Illuminate\Http\Client\PendingRequest withBody(resource|string $content, string $contentType)
      * @method static \Illuminate\Http\Client\PendingRequest withCookies(array $cookies, string $domain)
      * @method static \Illuminate\Http\Client\PendingRequest withDigestAuth(string $username, string $password)
      * @method static \Illuminate\Http\Client\PendingRequest withHeaders(array $headers)
@@ -10635,7 +10635,7 @@
                     /**
          * Associates a format with mime types.
          *
-         * @param string|array $mimeTypes The associated mime types (the preferred one must be the first as it will be used as the menu type)
+         * @param string|array $mimeTypes The associated mime types (the preferred one must be the first as it will be used as the content type)
          * @static 
          */ 
         public static function setFormat($format, $mimeTypes)
@@ -10789,7 +10789,7 @@
                         return $instance->getProtocolVersion();
         }
                     /**
-         * Returns the request body menu.
+         * Returns the request body content.
          *
          * @param bool $asResource If true, a resource will be returned
          * @return string|resource 
@@ -10883,7 +10883,7 @@
                         return $instance->getEncodings();
         }
                     /**
-         * Gets a list of menu types acceptable by the client browser in preferable order.
+         * Gets a list of content types acceptable by the client browser in preferable order.
          *
          * @return array 
          * @static 
@@ -10909,7 +10909,7 @@
                         return $instance->isXmlHttpRequest();
         }
                     /**
-         * Checks whether the client browser prefers safe menu or not according to RFC8674.
+         * Checks whether the client browser prefers safe content or not according to RFC8674.
          *
          * @see https://tools.ietf.org/html/rfc8674
          * @static 
@@ -10967,7 +10967,7 @@
                         return $instance->wantsJson();
         }
                     /**
-         * Determines whether the current requests accepts a given menu type.
+         * Determines whether the current requests accepts a given content type.
          *
          * @param string|array $contentTypes
          * @return bool 
@@ -10979,7 +10979,7 @@
                         return $instance->accepts($contentTypes);
         }
                     /**
-         * Return the most suitable menu type from the given array based on menu negotiation.
+         * Return the most suitable content type from the given array based on content negotiation.
          *
          * @param string|array $contentTypes
          * @return string|null 
@@ -10991,7 +10991,7 @@
                         return $instance->prefers($contentTypes);
         }
                     /**
-         * Determine if the current request accepts any menu type.
+         * Determine if the current request accepts any content type.
          *
          * @return bool 
          * @static 
@@ -11024,7 +11024,7 @@
                         return $instance->acceptsHtml();
         }
                     /**
-         * Determine if the given menu types match.
+         * Determine if the given content types match.
          *
          * @param string $actual
          * @param string $type
@@ -11580,7 +11580,7 @@
                         return $instance->make($content, $status, $headers);
         }
                     /**
-         * Create a new "no menu" response.
+         * Create a new "no content" response.
          *
          * @param int $status
          * @param array $headers
@@ -15134,7 +15134,7 @@
                         return $instance->first($views, $data, $mergeData);
         }
                     /**
-         * Get the rendered menu of the view based on a given condition.
+         * Get the rendered content of the view based on a given condition.
          *
          * @param bool $condition
          * @param string $view
@@ -15582,7 +15582,7 @@
                         $instance->slot($name, $content, $attributes);
         }
                     /**
-         * Save the slot menu for rendering.
+         * Save the slot content for rendering.
          *
          * @return void 
          * @static 
@@ -15655,7 +15655,7 @@
                         $instance->callCreator($view);
         }
                     /**
-         * Start injecting menu into a section.
+         * Start injecting content into a section.
          *
          * @param string $section
          * @param string|null $content
@@ -15668,7 +15668,7 @@
                         $instance->startSection($section, $content);
         }
                     /**
-         * Inject inline menu into a section.
+         * Inject inline content into a section.
          *
          * @param string $section
          * @param string $content
@@ -15681,7 +15681,7 @@
                         $instance->inject($section, $content);
         }
                     /**
-         * Stop injecting menu into a section and return its contents.
+         * Stop injecting content into a section and return its contents.
          *
          * @return string 
          * @static 
@@ -15692,7 +15692,7 @@
                         return $instance->yieldSection();
         }
                     /**
-         * Stop injecting menu into a section.
+         * Stop injecting content into a section.
          *
          * @param bool $overwrite
          * @return string 
@@ -15705,7 +15705,7 @@
                         return $instance->stopSection($overwrite);
         }
                     /**
-         * Stop injecting menu into a section and append it.
+         * Stop injecting content into a section and append it.
          *
          * @return string 
          * @throws \InvalidArgumentException
@@ -15856,7 +15856,7 @@
                         return $instance->getLoopStack();
         }
                     /**
-         * Start injecting menu into a push section.
+         * Start injecting content into a push section.
          *
          * @param string $section
          * @param string $content
@@ -15869,7 +15869,7 @@
                         $instance->startPush($section, $content);
         }
                     /**
-         * Stop injecting menu into a push section.
+         * Stop injecting content into a push section.
          *
          * @return string 
          * @throws \InvalidArgumentException
@@ -15881,7 +15881,7 @@
                         return $instance->stopPush();
         }
                     /**
-         * Start prepending menu into a push section.
+         * Start prepending content into a push section.
          *
          * @param string $section
          * @param string $content
@@ -15894,7 +15894,7 @@
                         $instance->startPrepend($section, $content);
         }
                     /**
-         * Stop prepending menu into a push section.
+         * Stop prepending content into a push section.
          *
          * @return string 
          * @throws \InvalidArgumentException

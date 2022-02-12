@@ -46,4 +46,8 @@ Route::group(['prefix' => 'profile', 'middleware' => 'auth'], function () {
         ->name('profile.documents.store');
 });
 
-
+Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function() {
+    Route::get('/', function () {
+        return view('admin.dashboard');
+    });
+});
