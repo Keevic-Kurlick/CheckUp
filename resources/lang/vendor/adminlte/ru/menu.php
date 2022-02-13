@@ -3,5 +3,5 @@
 return [
     'users'             => 'Пользователи',
     'users_roles'       => 'Роли',
-    'assign_user_role'  => 'Назначить роль',
+    'assign_user_role'  => 'Изменить роль',
 ];

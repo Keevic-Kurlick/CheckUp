@@ -46,8 +46,14 @@ Route::group(['prefix' => 'profile', 'middleware' => 'auth'], function () {
         ->name('profile.documents.store');
 });
 
-Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function() {
+Route::name('admin.')->prefix('admin')->middleware('admin')->group(function() {
     Route::get('/', function () {
         return view('admin.dashboard');
     });
+
+    Route::get('/users/roles/edit', [\App\Http\Controllers\Admin\Users\Roles\RoleController::class, 'editRolesView'])
+        ->name('users.roles.edit');
+
+    Route::post('/users/roles/edit', [\App\Http\Controllers\Admin\Users\Roles\RoleController::class, 'editRoles'])
+        ->name('users.roles.edit');
 });
