@@ -255,9 +255,15 @@ return [
         ],
         ['header' => 'users'],
         [
-            'text' => 'profile',
-            'url'  => 'admin/settings',
+            'text' => 'users_roles',
             'icon' => 'fas fa-fw fa-user',
+            'submenu' => [
+                [
+                    'text' => 'assign_user_role',
+                    'url'  =>  'admin/users/roles/edit',
+                    'icon' => 'fas fa-arrow-right',
+                ],
+            ],
         ],
     ],
 
