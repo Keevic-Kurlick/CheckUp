@@ -22,22 +22,32 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/menu/services', [App\Http\Controllers\Menu\ServicesController::class, 'servicesList'])
-    ->name('menu.services.list');
+Route::group(['prefix' => 'menu'], function () {
 
-Route::middleware('auth')->get('/profile/orders', [OrdersController::class, 'ordersList'])
-    ->name('profile.orders.list');
+    Route::get('/services', [App\Http\Controllers\Menu\ServicesController::class, 'servicesList'])
+        ->name('menu.services.list');
 
-Route::middleware('auth')->post('/menu/orders/create', [\App\Http\Controllers\Menu\OrdersController::class, 'store'])
-    ->name('menu.orders.store');
+    Route::middleware( 'auth')->post('/orders/create', [\App\Http\Controllers\Menu\OrdersController::class, 'store'])
+        ->name('menu.orders.store');
+});
 
-Route::middleware('auth')->get('/profile/settings', [\App\Http\Controllers\Profile\SettingsController::class, 'settings'])
-    ->name('profile.settings');
+Route::group(['prefix' => 'profile', 'middleware' => 'auth'], function () {
 
-Route::middleware('auth')->get('/profile/documents', [\App\Http\Controllers\Profile\DocumentsController::class, 'profileDocuments'])
-    ->name('profile.documents');
+    Route::get('/orders', [OrdersController::class, 'ordersList'])
+        ->name('profile.orders.list');
 
-Route::middleware('auth')->post('/profile/documents/store', [\App\Http\Controllers\Profile\DocumentsController::class, 'store'])
-    ->name('profile.documents.store');
+    Route::get('settings', [\App\Http\Controllers\Profile\SettingsController::class, 'settings'])
+        ->name('profile.settings');
 
+    Route::get('documents', [\App\Http\Controllers\Profile\DocumentsController::class, 'profileDocuments'])
+        ->name('profile.documents');
 
+    Route::post('documents/store', [\App\Http\Controllers\Profile\DocumentsController::class, 'store'])
+        ->name('profile.documents.store');
+});
+
+Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function() {
+    Route::get('/', function () {
+        return view('admin.dashboard');
+    });
+});
