@@ -28,7 +28,10 @@
 
 @import "layouts/profile/settings";
 
+// common styles
 @import "common";
+
+@import "elements";
 
 * {
    margin: 0;
