@@ -3,6 +3,7 @@
     "/js/menu/services.js": "/js/menu/services.js",
     "/js/profile/documents.js": "/js/profile/documents.js",
     "/css/app.css": "/css/app.css",
+    "/css/elements.css": "/css/elements.css",
     "/css/layouts/menu/services.css": "/css/layouts/menu/services.css",
     "/css/layouts/profile/documents.css": "/css/layouts/profile/documents.css"
 }

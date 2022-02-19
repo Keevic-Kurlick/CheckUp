@@ -25,33 +25,43 @@
     <form action="{{ route('admin.users.roles.edit') }}" method="post">
         @csrf
         <input type="submit" class="btn btn-success" value="Изменить">
-        <table class="table mt-3 container">
-            <thead>
+
+        <div class="container">
+            <table class="table mt-3">
+                <thead>
                 <tr>
                     <th scope="col">Пользователь</th>
                     <th scope="col">Роль</th>
                 </tr>
-            </thead>
-            <tbody>
-                @foreach($users as $user)
-                    <tr>
-                        <td>
-                            {{ $user->name }}
-                        </td>
-                        <td>
-                            <select name="users[{{ $user->id }}]"
-                                    class="form-control">
-                                @foreach($roles as $role)
-                                    <option value="{{ $role->id }}"
-                                    {{ ($user->role_id === $role->id) ? 'selected' : '' }}>
-                                        {{ __("users.roles.$role->name") }}
-                                    </option>
-                                @endforeach
-                            </select>
-                        </td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    @forelse($users as $user)
+                        <tr>
+                            <td>
+                                {{ $user->name }}
+                            </td>
+                            <td>
+                                <select name="users[{{ $user->id }}]"
+                                        class="form-control">
+                                    @foreach($roles as $role)
+                                        <option value="{{ $role->id }}"
+                                                {{ ($user->role_id === $role->id) ? 'selected' : '' }}>
+                                            {{ __("users.roles.$role->name") }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </td>
+                        </tr>
+                    @empty
+                        <tr class="empty-table-data">
+                            <td colspan="2">Нет данных</td>
+                        </tr>
+                    @endforelse
+                </tbody>
+            </table>
+
+            {{ $users->links() }}
+
+        </div>
     </form>
 @endsection
