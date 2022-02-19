@@ -1,4 +1,4 @@
-@extends('adminlte::page')
+@extends('admin.baseAdminTemplate')
 
 @php
 /**
@@ -11,6 +11,14 @@
 
 @section('content_header')
     <h1> {{ __('admin.menu.assign_user_role') }}</h1>
+@endsection
+
+@section('css')
+    @parent
+@endsection
+
+@section('js')
+    @parent
 @endsection
 
 @section('content')

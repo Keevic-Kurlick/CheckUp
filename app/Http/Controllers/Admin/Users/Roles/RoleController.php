@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Users\EditRoleRequest;
 use App\Repositories\RoleRepository;
 use App\Repositories\UserRepository;
+use Yoeunes\Toastr\Toastr;
 use function view;
 
 class RoleController extends Controller
@@ -18,7 +19,8 @@ class RoleController extends Controller
     public function __construct(
         private UserRepository $userRepository,
         private RoleRepository $roleRepository,
-        private RoleManager $roleManager
+        private RoleManager $roleManager,
+        private Toastr $toastr
     ){}
 
     /**
@@ -40,7 +42,15 @@ class RoleController extends Controller
      */
     public function editRoles(EditRoleRequest $editRoleRequest)
     {
-        $this->roleManager->editRole($editRoleRequest->users);
+        $notifyMessage = __('admin.notifications.role.role_was_changed.success');
+
+        try {
+            $this->roleManager->editRole($editRoleRequest->users);
+        } catch (\Exception $e) {
+            $notifyMessage = __('admin.notifications.role.role_was_changed.error');
+        }
+
+        $this->toastr->success($notifyMessage);
 
         return redirect()->route('admin.users.roles.edit');
     }
