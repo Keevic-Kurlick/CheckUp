@@ -1,4 +1,4 @@
-@extends('admin.baseAdminTemplate')
+@extends('admin.base_admin_template')
 
 @php
 /**
