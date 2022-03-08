@@ -8,6 +8,7 @@
 
 @section('css')
     @parent
+    <link href="{{ asset('css/layouts/admin/services/index.css') }}">
 @endsection
 
 @section('js')

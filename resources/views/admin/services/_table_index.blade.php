@@ -11,6 +11,7 @@
             <th scope="col">Наименование</th>
             <th scope="col">Описание</th>
             <th scope="col">Стоимость</th>
+            <th scope="col">Действия</th>
         </tr>
         </thead>
         <tbody>
@@ -27,6 +28,13 @@
                 </td>
                 <td>
                     {{ $service->price }}
+                </td>
+                <td>
+                    <a href="{{ route('admin.services.edit', $service->id) }}">
+                        <i class="fas fa-edit icon-edit"></i>
+                    </a>
+
+                    <i class="fas fa-trash-alt icon-remove"></i>
                 </td>
             </tr>
         @empty

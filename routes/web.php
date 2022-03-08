@@ -65,4 +65,10 @@ Route::name('admin.')->prefix('admin')->middleware('admin')->group(function() {
 
     Route::post('/services/create', [\App\Http\Controllers\Admin\Services\ServicesController::class, 'store'])
         ->name('services.create');
+
+    Route::get('/services/{id}/edit', [\App\Http\Controllers\Admin\Services\ServicesController::class, 'edit'])
+        ->name('services.edit');
+
+    Route::patch('/services/{id}/update', [\App\Http\Controllers\Admin\Services\ServicesController::class, 'update'])
+        ->name('services.update');
 });

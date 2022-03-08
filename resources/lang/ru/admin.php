@@ -10,6 +10,7 @@ return [
     'services' => [
         'titles' => [
             'services_create'   => 'Создание услуги',
+            'services_edit'     => 'Редактирование услуги',
         ],
         'pages' => [
             'create' => [
@@ -30,6 +31,10 @@ return [
             'service_was_created' => [
                 'success'   => 'Услуга была успешно создана.',
                 'error'     => 'При создании услуги произошла ошибка.',
+            ],
+            'service_was_updated' => [
+                'success'   => 'Услуга была успешно обновлена.',
+                'error'     => 'При обновлении услуги произошла ошибка.',
             ],
         ],
     ],

@@ -4,10 +4,9 @@ namespace App\Http\Controllers\Admin\Services;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Services\StoreServiceRequest;
+use App\Http\Requests\Admin\Services\UpdateServiceRequest;
 use App\Repositories\Admin\ServiceRepository;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
-use Yoeunes\Toastr\Facades\Toastr;
 
 class ServicesController extends Controller
 {
@@ -64,10 +63,7 @@ class ServicesController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
@@ -75,26 +71,43 @@ class ServicesController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
-    public function edit($id)
+    public function edit(int $id)
     {
-        //
+        $service = $this->serviceRepository->findServiceByIdToEdit($id);
+
+        return view('admin.services.edit', compact('service'));
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param UpdateServiceRequest $request
+     * @param int $id
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, $id)
+    public function update(UpdateServiceRequest $request, int $id)
     {
-        //
+        $notifyMessageStatus = 'success';
+
+        try {
+            $this->servicesManager->updateServiceById($request, $id);
+        } catch (\Exception $e) {
+            $notifyMessageStatus = 'error';
+
+            Log::error('App.Http.Controllers.Admin.Services.ServicesController.update',
+                [
+                    'data' => [
+                        'message' => $e->getMessage(),
+                    ],
+                ]
+            );
+        }
+
+        $notifyMessage = __("admin.notifications.service.service_was_updated.{$notifyMessageStatus}");
+        toastr()->$notifyMessageStatus($notifyMessage);
+
+        return redirect()->route('admin.services');
     }
 
     /**
