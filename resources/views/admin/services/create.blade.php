@@ -1,9 +1,9 @@
 @extends('admin.base_admin_template')
 
-@section('title', __('admin.menu.services_create'))
+@section('title', __('admin.services.titles.services_create'))
 
 @section('content_header')
-    <h1> {{ __('admin.menu.services_create') }}</h1>
+    <h1> {{ __('admin.services.titles.services_create') }}</h1>
 @endsection
 
 @section('css')

@@ -6,9 +6,11 @@ return [
         'users_roles'       => 'Роли',
         'assign_user_role'  => 'Изменить роль',
         'services'          => 'Услуги',
-        'services_create'   => 'Создание услуги',
     ],
     'services' => [
+        'titles' => [
+            'services_create'   => 'Создание услуги',
+        ],
         'pages' => [
             'create' => [
                 'service_name'          => 'Наименование',
