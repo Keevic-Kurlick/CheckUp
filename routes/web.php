@@ -56,4 +56,22 @@ Route::name('admin.')->prefix('admin')->middleware('admin')->group(function() {
 
     Route::post('/users/roles/edit', [\App\Http\Controllers\Admin\Users\Roles\RoleController::class, 'editRoles'])
         ->name('users.roles.edit');
+
+    Route::get('/services', [\App\Http\Controllers\Admin\Services\ServicesController::class, 'index'])
+        ->name('services');
+
+    Route::get('/services/create', [\App\Http\Controllers\Admin\Services\ServicesController::class, 'create'])
+        ->name('services.create');
+
+    Route::post('/services/create', [\App\Http\Controllers\Admin\Services\ServicesController::class, 'store'])
+        ->name('services.create');
+
+    Route::get('/services/{id}/edit', [\App\Http\Controllers\Admin\Services\ServicesController::class, 'edit'])
+        ->name('services.edit');
+
+    Route::patch('/services/{id}/update', [\App\Http\Controllers\Admin\Services\ServicesController::class, 'update'])
+        ->name('services.update');
+
+    Route::delete('/services/{id}/destroy', [\App\Http\Controllers\Admin\Services\ServicesController::class, 'destroy'])
+        ->name('services.destroy');
 });

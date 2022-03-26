@@ -238,20 +238,9 @@ return [
 
         // Sidebar items:
         [
-            'type' => 'sidebar-menu-search',
-            'text' => 'search',
-        ],
-        [
             'text' => 'blog',
             'url'  => 'admin/blog',
             'can'  => 'manage-blog',
-        ],
-        [
-            'text'        => 'pages',
-            'url'         => 'admin/pages',
-            'icon'        => 'far fa-fw fa-file',
-            'label'       => 4,
-            'label_color' => 'success',
         ],
         ['header' => 'users'],
         [
@@ -260,10 +249,15 @@ return [
             'submenu' => [
                 [
                     'text' => 'assign_user_role',
-                    'url'  =>  'admin/users/roles/edit',
+                    'url'  => 'admin/users/roles/edit',
                     'icon' => 'fas fa-arrow-right',
                 ],
             ],
+        ],
+        [
+            'text'  => 'services',
+            'icon'  => 'fas fa-file-medical',
+            'url'   => '/admin/services',
         ],
     ],
 
