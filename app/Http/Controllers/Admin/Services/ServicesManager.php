@@ -47,4 +47,15 @@ class ServicesManager
         DB::commit();
     }
 
+    /**
+     * @return void
+     */
+    public function destroyServiceById(int $id)
+    {
+        DB::beginTransaction();
+
+        Service::whereId($id)->delete();
+
+        DB::commit();
+    }
 }

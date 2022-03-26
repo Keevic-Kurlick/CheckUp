@@ -59,7 +59,7 @@ class ServicesController extends Controller
         $notifyMessage = __("admin.notifications.service.service_was_created.{$notifyMessageStatus}");
         toastr()->$notifyMessageStatus($notifyMessage);
 
-        return redirect()->route('admin.services.create');
+        return redirect()->route('admin.services');
     }
 
     /**
@@ -111,13 +111,28 @@ class ServicesController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     * @return void
      */
-    public function destroy($id)
+    public function destroy(int $id)
     {
-        //
+        $notifyMessageStatus = 'success';
+
+        try {
+            $this->servicesManager->destroyServiceById($id);
+        } catch (\Exception $e) {
+            $notifyMessageStatus = 'error';
+
+            Log::error('App.Http.Controllers.Admin.Services.ServicesController.destroy',
+                [
+                    'data' => [
+                        'message' => $e->getMessage(),
+                    ],
+                ]
+            );
+        }
+
+        $notifyMessage = __("admin.notifications.service.service_was_destroyed.{$notifyMessageStatus}");
+        toastr()->$notifyMessageStatus($notifyMessage);
     }
 }

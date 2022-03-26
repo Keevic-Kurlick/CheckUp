@@ -8,11 +8,15 @@
 
 @section('css')
     @parent
-    <link href="{{ asset('css/layouts/admin/services/index.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/layouts/admin/services/index.css') }}">
 @endsection
 
 @section('js')
     @parent
+    <script src="{{ asset('js/admin/services/destroy.js') }}"></script>
+    <script>
+        window.csrfToken = @json(csrf_token())
+    </script>
 @endsection
 
 @section('content')

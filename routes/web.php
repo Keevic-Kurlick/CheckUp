@@ -71,4 +71,7 @@ Route::name('admin.')->prefix('admin')->middleware('admin')->group(function() {
 
     Route::patch('/services/{id}/update', [\App\Http\Controllers\Admin\Services\ServicesController::class, 'update'])
         ->name('services.update');
+
+    Route::delete('/services/{id}/destroy', [\App\Http\Controllers\Admin\Services\ServicesController::class, 'destroy'])
+        ->name('services.destroy');
 });

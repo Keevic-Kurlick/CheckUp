@@ -16,7 +16,7 @@
         </thead>
         <tbody>
         @forelse($services as $service)
-            <tr>
+            <tr class="service-block">
                 <td>
                     {{ $service->id }}
                 </td>
@@ -30,11 +30,16 @@
                     {{ $service->price }}
                 </td>
                 <td>
-                    <a href="{{ route('admin.services.edit', $service->id) }}">
-                        <i class="fas fa-edit icon-edit"></i>
-                    </a>
-
-                    <i class="fas fa-trash-alt icon-remove"></i>
+                    <div class="row">
+                        <div class="col-6 service-block-edit">
+                            <a href="{{ route('admin.services.edit', $service->id) }}">
+                                <i class="fas fa-edit icon-edit active"></i>
+                            </a>
+                        </div>
+                        <div class="col-6 service-block-destroy">
+                            <i class='fas fa-trash-alt icon-remove destroy-button active' data-service-id="{{ $service->id }}"></i>
+                        </div>
+                    </div>
                 </td>
             </tr>
         @empty

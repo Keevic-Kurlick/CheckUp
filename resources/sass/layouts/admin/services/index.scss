@@ -1,17 +1,29 @@
-body {
-  background: red;
-}
-
-table {
-  background: red;
-}
-
 .service_table {
   tbody {
-    a {
-      i {
-        .icon-edit {
-          font-size: medium;
+    .service-block {
+
+      .col-6 {
+        display: flex;
+        align-items: center;
+
+        &.service-block-destroy, &.service-block-edit {
+          i {
+            font-size: 20px;
+
+            &.active {
+              color: #0c84ff;
+              cursor: pointer;
+
+              &:hover {
+                color: #0a58ca;
+              }
+            }
+
+            &.disabled {
+              cursor: auto;
+              color: #a9a9a9;
+            }
+          }
         }
       }
     }
