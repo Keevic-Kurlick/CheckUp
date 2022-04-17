@@ -259,6 +259,11 @@ return [
             'icon'  => 'fas fa-file-medical',
             'url'   => '/admin/services',
         ],
+        [
+            'text'  => 'medical_certificates',
+            'icon'  => 'fas fa-file-medical',
+            'url'   => '/admin/medical_certificates',
+        ],
     ],
 
     /*

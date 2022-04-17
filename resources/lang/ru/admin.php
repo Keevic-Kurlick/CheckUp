@@ -2,10 +2,11 @@
 
 return [
     'menu' => [
-        'users'             => 'Пользователи',
-        'users_roles'       => 'Роли',
-        'assign_user_role'  => 'Изменить роль',
-        'services'          => 'Услуги',
+        'users'                 => 'Пользователи',
+        'users_roles'           => 'Роли',
+        'assign_user_role'      => 'Изменить роль',
+        'services'              => 'Услуги',
+        'medical_certificates'  => 'Справки',
     ],
     'services' => [
         'titles' => [
@@ -19,6 +20,17 @@ return [
                 'service_price'         => 'Цена',
             ]
         ],
+    ],
+    'medical_certificates' => [
+        'titles' => [
+            'create' => 'Создание справки',
+        ],
+        'pages' => [
+            'create' => [
+                'medical_certificate_name'          => 'Наименование',
+                'medical_certificate_description'   => 'Описание',
+            ]
+        ]
     ],
     'notifications' => [
         'role' => [
@@ -41,5 +53,11 @@ return [
                 'error'     => 'При удалении услуги произошла ошибка.',
             ],
         ],
+        'medical_certificate' => [
+            'medical_certificate_was_created' => [
+                'success'   => 'Справка была успешно создана.',
+                'error'     => 'При создании справки произошла ошибка.',
+            ]
+        ]
     ],
 ];

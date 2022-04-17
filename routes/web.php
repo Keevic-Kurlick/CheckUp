@@ -74,4 +74,21 @@ Route::name('admin.')->prefix('admin')->middleware('admin')->group(function() {
 
     Route::delete('/services/{id}/destroy', [\App\Http\Controllers\Admin\Services\ServicesController::class, 'destroy'])
         ->name('services.destroy');
+
+    Route::name('medical_certificates.')->prefix('medical_certificates')->group(function() {
+        Route::get('/', [\App\Http\Controllers\Admin\MedicalCertificates\MedicalCertificatesController::class, 'index'])
+            ->name('index');
+
+        Route::get('/create', [\App\Http\Controllers\Admin\MedicalCertificates\MedicalCertificatesController::class, 'create'])
+            ->name('create');
+
+        Route::post('/create', [\App\Http\Controllers\Admin\MedicalCertificates\MedicalCertificatesController::class, 'store'])
+            ->name('store');
+
+        Route::get('/{id}/edit', [\App\Http\Controllers\Admin\MedicalCertificates\MedicalCertificatesController::class,'edit'])
+            ->name('edit');
+
+        Route::delete('/{id}/destroy', [\App\Http\Controllers\Admin\MedicalCertificates\MedicalCertificatesController::class, 'destroy'])
+            ->name('destroy');
+    });
 });

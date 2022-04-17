@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Profile;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Profile\DocumentsRequest;
-use App\Models\Patient_information;
+use App\Models\PatientInformation;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -26,9 +26,9 @@ class DocumentsController extends Controller
         DB::beginTransaction();
 
         if (empty($patient->patientinfo_id)) {
-            $patientInformation = new Patient_information();
+            $patientInformation = new PatientInformation();
         } else {
-            $patientInformation = Patient_information::whereId($patient->patientinfo_id)
+            $patientInformation = PatientInformation::whereId($patient->patientinfo_id)
                                     ->get()->first();
         }
 
@@ -58,7 +58,7 @@ class DocumentsController extends Controller
         $patientInformation = null;
 
         if (!empty($patient->patientinfo_id)) {
-            $patientInformation = Patient_information::whereId($patient->patientinfo_id)
+            $patientInformation = PatientInformation::whereId($patient->patientinfo_id)
                 ->get()->first();
         }
 

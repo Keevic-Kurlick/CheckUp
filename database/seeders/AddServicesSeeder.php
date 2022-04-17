@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\Medical_certificate;
+use App\Models\MedicalCertificate;
 use App\Models\Service;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -101,7 +101,7 @@ class AddServicesSeeder extends Seeder
             $medCertInfo    = $item['med_sert'];
             $serviceInfo    = $item['service'];
 
-            $medicalCertificate                 = new Medical_certificate();
+            $medicalCertificate                 = new MedicalCertificate();
             $medicalCertificate->name           = $medCertInfo['name'];
             $medicalCertificate->description    = $medCertInfo['description'];
             $medicalCertificate->save();

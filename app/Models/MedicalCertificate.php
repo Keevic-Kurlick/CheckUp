@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static string whereName()
  * @method static string whereTemplatePath()
  */
-class Medical_certificate extends Model
+class MedicalCertificate extends Model
 {
     use HasFactory;
 }

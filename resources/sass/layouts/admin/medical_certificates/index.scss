@@ -1,0 +1,33 @@
+.medical_certificates_table {
+  overflow: auto;
+
+  tbody {
+    .medical_certificates-block {
+
+      .col-6 {
+        display: flex;
+        align-items: center;
+
+        &.medical_certificates-block-destroy, &.medical_certificates-block-edit {
+          i {
+            font-size: 20px;
+
+            &.active {
+              color: #0c84ff;
+              cursor: pointer;
+
+              &:hover {
+                color: #0a58ca;
+              }
+            }
+
+            &.disabled {
+              cursor: auto;
+              color: #a9a9a9;
+            }
+          }
+        }
+      }
+    }
+  }
+}

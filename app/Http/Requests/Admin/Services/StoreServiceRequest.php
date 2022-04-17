@@ -4,6 +4,11 @@ namespace App\Http\Requests\Admin\Services;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ * @property-read string    $service_name
+ * @property-read string    $service_description
+ * @property-read int       $service_price
+ */
 class StoreServiceRequest extends FormRequest
 {
     /**
@@ -18,6 +23,9 @@ class StoreServiceRequest extends FormRequest
         ];
     }
 
+    /**
+     * @return array
+     */
     public function attributes()
     {
         return [

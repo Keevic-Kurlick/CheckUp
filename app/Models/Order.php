@@ -96,6 +96,6 @@ class Order extends Model
      */
     public function orderInfo(): \Illuminate\Database\Eloquent\Relations\HasOne
     {
-        return $this->hasOne(Order_information::class);
+        return $this->hasOne(OrderInformation::class);
     }
 }
