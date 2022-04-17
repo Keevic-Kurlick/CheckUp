@@ -5,10 +5,10 @@ namespace App\Services\PdfConverter\Interfaces;
 interface PdfConverterInterface
 {
     /**
-     * @param BasePdfConverterDTOInterface $basePdfConverterDTO
+     * @param BasePdfConverterDTOInterface $pdfConverterDTO
      * @return static
      */
-    public function setBasePdfConverterDTO(BasePdfConverterDTOInterface $basePdfConverterDTO): static;
+    public function setPdfConverterDTO(BasePdfConverterDTOInterface $pdfConverterDTO): static;
 
     /**
      * @return void

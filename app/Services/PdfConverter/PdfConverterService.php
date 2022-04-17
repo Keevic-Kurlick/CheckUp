@@ -19,7 +19,7 @@ class PdfConverterService implements PdfConverterInterface
     private string $defaultFontName;
 
     /** @var BasePdfConverterDTOInterface */
-    private BasePdfConverterDTOInterface $basePdfConverterDTO;
+    private BasePdfConverterDTOInterface $pdfConverterDTO;
 
     public function __construct()
     {
@@ -29,12 +29,12 @@ class PdfConverterService implements PdfConverterInterface
     }
 
     /**
-     * @param BasePdfConverterDTOInterface $basePdfConverterDTO
+     * @param BasePdfConverterDTOInterface $pdfConverterDTO
      * @return PdfConverterService
      */
-    public function setBasePdfConverterDTO(BasePdfConverterDTOInterface $basePdfConverterDTO): static
+    public function setPdfConverterDTO(BasePdfConverterDTOInterface $pdfConverterDTO): static
     {
-        $this->basePdfConverterDTO  = $basePdfConverterDTO;
+        $this->pdfConverterDTO  = $pdfConverterDTO;
         return $this;
     }
 
@@ -44,14 +44,14 @@ class PdfConverterService implements PdfConverterInterface
      */
     public function run(): void
     {
-        $pathToFile     = storage_path($this->basePdfConverterDTO->getPathToFile());
-        $pathToResult   = storage_path($this->basePdfConverterDTO->getPathToResult());
+        $pathToFile     = storage_path($this->pdfConverterDTO->getPathToFile());
+        $pathToResult   = storage_path($this->pdfConverterDTO->getPathToResult());
 
         Settings::setPdfRenderer($this->rendererName, $this->rendererLibraryPath);
 
         $phpWord = IOFactory::load(
             $pathToFile,
-            $this->basePdfConverterDTO->getFileExtension()
+            $this->pdfConverterDTO->getFileExtension()
         );
 
         $phpWord->setDefaultFontName($this->defaultFontName);

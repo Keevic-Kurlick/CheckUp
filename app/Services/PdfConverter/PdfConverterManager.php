@@ -9,17 +9,17 @@ use App\Services\PdfConverter\Interfaces\PdfConverterManagerInterface;
 class PdfConverterManager implements PdfConverterManagerInterface
 {
     /** @var BasePdfConverterDTOInterface */
-    private BasePdfConverterDTOInterface $basePdfConverterDTO;
+    private BasePdfConverterDTOInterface $pdfConverterDTO;
 
     /** @var PdfConverterInterface */
     private PdfConverterInterface $pdfConverter;
 
     /**
-     * @param BasePdfConverterDTOInterface $basePdfConverterDTO
+     * @param BasePdfConverterDTOInterface $pdfConverterDTO
      */
-    public function __construct(BasePdfConverterDTOInterface $basePdfConverterDTO)
+    public function __construct(BasePdfConverterDTOInterface $pdfConverterDTO)
     {
-        $this->basePdfConverterDTO = $basePdfConverterDTO;
+        $this->pdfConverterDTO = $pdfConverterDTO;
         $this->pdfConverter = \App::make(PdfConverterInterface::class);
     }
 
@@ -29,7 +29,7 @@ class PdfConverterManager implements PdfConverterManagerInterface
     public function convert(): void
     {
         $this->pdfConverter
-            ->setBasePdfConverterDTO($this->basePdfConverterDTO)
+            ->setPdfConverterDTO($this->pdfConverterDTO)
             ->run();
     }
 }
