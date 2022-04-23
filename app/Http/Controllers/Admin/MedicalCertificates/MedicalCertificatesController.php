@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Admin\MedicalCertificates;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\MedicalCertificates\StoreMedicalCertificateRequest;
+use App\Http\Requests\Admin\MedicalCertificates\UpdateMedicalCertificateRequest;
 use App\Repositories\Admin\MedicalCertificateRepository;
 use Illuminate\Support\Facades\Log;
+use Illuminate\View\View;
 
 class MedicalCertificatesController extends Controller
 {
@@ -66,11 +68,71 @@ class MedicalCertificatesController extends Controller
     }
 
     /**
+     * @param int $id
+     * @return \Illuminate\Http\RedirectResponse|View
+     */
+    public function edit(int $id)
+    {
+        try {
+            $medicalCertificate = $this->medicalCertificateRepository->getMedicalCertificatesToEdit($id);
+
+            $response = view('admin.medical_certificates.edit', compact('medicalCertificate'));
+        } catch (\Exception $e) {
+
+            $response = redirect()->route('admin.medical_certificates.index');
+
+            $notifyMessage = __("admin.notifications.medical_certificate.medical_certificate_not_found");
+            toastr()->warning($notifyMessage);
+
+            Log::error('App.Http.Controllers.Admin.MedicalCertificates.MedicalCertificatesController.edit',
+                [
+                    'data' => [
+                        'message' => $e->getMessage(),
+                    ],
+                ]
+            );
+        }
+
+        return $response;
+    }
+
+    /**
+     * @param UpdateMedicalCertificateRequest $request
+     * @param int $id
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Throwable
+     */
+    public function update(UpdateMedicalCertificateRequest $request, int $id): \Illuminate\Http\RedirectResponse
+    {
+        $notifyMessageStatus = 'success';
+
+        try {
+            $this->medicalCertificatesManager->updateMedicalCertificateById($request, $id);
+        } catch (\Exception $e) {
+
+            $notifyMessageStatus = 'error';
+
+            Log::error('App.Http.Controllers.Admin.MedicalCertificates.MedicalCertificatesController.update',
+                [
+                    'data' => [
+                        'message' => $e->getMessage(),
+                    ],
+                ]
+            );
+        }
+
+        $notifyMessage = __("admin.notifications.medical_certificate.medical_certificate_was_updated.{$notifyMessageStatus}");
+        toastr()->$notifyMessageStatus($notifyMessage);
+
+        return redirect()->route('admin.medical_certificates.index');
+    }
+
+    /**
      * @param $id
      * @return void
      * @throws \Throwable
      */
-    public function destroy($id) {
+    public function destroy(int $id) {
         $notifyMessageStatus = 'success';
 
         try {
@@ -78,7 +140,7 @@ class MedicalCertificatesController extends Controller
         } catch (\Exception $e) {
             $notifyMessageStatus = 'error';
 
-            Log::error('App.Http.Controllers.Admin.Services.ServicesController.destroy',
+            Log::error('App.Http.Controllers.Admin.MedicalCertificates.MedicalCertificatesController.destroy',
                 [
                     'data' => [
                         'message' => $e->getMessage(),

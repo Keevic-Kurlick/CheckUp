@@ -15,4 +15,10 @@ use Illuminate\Database\Eloquent\Model;
 class MedicalCertificate extends Model
 {
     use HasFactory;
+
+    /** @var string[] $fillable */
+    protected $fillable  = [
+        'name',
+        'description',
+    ];
 }

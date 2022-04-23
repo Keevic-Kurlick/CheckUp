@@ -88,6 +88,9 @@ Route::name('admin.')->prefix('admin')->middleware('admin')->group(function() {
         Route::get('/{id}/edit', [\App\Http\Controllers\Admin\MedicalCertificates\MedicalCertificatesController::class,'edit'])
             ->name('edit');
 
+        Route::patch('/{id}/update', [\App\Http\Controllers\Admin\MedicalCertificates\MedicalCertificatesController::class, 'update'])
+            ->name('update');
+
         Route::delete('/{id}/destroy', [\App\Http\Controllers\Admin\MedicalCertificates\MedicalCertificatesController::class, 'destroy'])
             ->name('destroy');
     });

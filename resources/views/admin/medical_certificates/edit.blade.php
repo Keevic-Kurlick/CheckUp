@@ -1,3 +1,9 @@
+@php
+    /**
+     * @var \App\Models\MedicalCertificate $medicalCertificate
+     */
+@endphp
+
 @extends('admin.base_admin_template')
 
 @section('title', __('admin.medical_certificates.titles.edit'))
@@ -19,15 +25,16 @@
         <div class="edit-medical_certificate">
             <div class="row">
                 <div class="col-12">
-                    <form action="{{ route('admin.medical_certificates.update') }}" method="post">
+                    <form action="{{ route('admin.medical_certificates.update', $medicalCertificate->id) }}" method="post">
                         @csrf
+                        @method('patch')
                         <div class="form-group">
                             <label for="medical_certificate_name">{{ __('admin.medical_certificates.pages.edit.medical_certificate_name') }}</label>
                             <input class="form-control @error('medical_certificate_name') is-invalid @enderror"
                                    type="text"
                                    id="medical_certificate_name"
                                    name="medical_certificate_name"
-                                   value="{{ old('medical_certificate_name') ?? ''}}">
+                                   value="{{ $medicalCertificate->name }}">
 
                             <x-show-error field-name="medical_certificate_name" />
                         </div>
@@ -38,7 +45,7 @@
                                       type="text"
                                       id="medical_certificate_description"
                                       name="medical_certificate_description">
-                                {{ old('medical_certificate_description') ?? ''}}
+                                {{ $medicalCertificate->description }}
                             </textarea>
                             <x-show-error field-name="medical_certificate_description" />
                         </div>
