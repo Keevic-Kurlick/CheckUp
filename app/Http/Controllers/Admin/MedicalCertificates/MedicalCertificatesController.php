@@ -64,4 +64,30 @@ class MedicalCertificatesController extends Controller
 
         return redirect()->route('admin.medical_certificates.index');
     }
+
+    /**
+     * @param $id
+     * @return void
+     * @throws \Throwable
+     */
+    public function destroy($id) {
+        $notifyMessageStatus = 'success';
+
+        try {
+            $this->medicalCertificatesManager->destroyMedicalCertificate($id);
+        } catch (\Exception $e) {
+            $notifyMessageStatus = 'error';
+
+            Log::error('App.Http.Controllers.Admin.Services.ServicesController.destroy',
+                [
+                    'data' => [
+                        'message' => $e->getMessage(),
+                    ],
+                ]
+            );
+        }
+
+        $notifyMessage = __("admin.notifications.medical_certificate.medical_certificate_was_destroyed.{$notifyMessageStatus}");
+        toastr()->$notifyMessageStatus($notifyMessage);
+    }
 }

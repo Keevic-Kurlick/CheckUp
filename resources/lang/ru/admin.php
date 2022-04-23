@@ -23,10 +23,15 @@ return [
     ],
     'medical_certificates' => [
         'titles' => [
-            'create' => 'Создание справки',
+            'create'    => 'Создание справки',
+            'edit'      => 'Редактирование справки',
         ],
         'pages' => [
             'create' => [
+                'medical_certificate_name'          => 'Наименование',
+                'medical_certificate_description'   => 'Описание',
+            ],
+            'edit' => [
                 'medical_certificate_name'          => 'Наименование',
                 'medical_certificate_description'   => 'Описание',
             ]
@@ -57,7 +62,11 @@ return [
             'medical_certificate_was_created' => [
                 'success'   => 'Справка была успешно создана.',
                 'error'     => 'При создании справки произошла ошибка.',
-            ]
+            ],
+            'medical_certificate_was_destroyed' => [
+                'success'   => 'Справка была успешно удалена.',
+                'error'     => 'При удалении справки произошла ошибка.',
+            ],
         ]
     ],
 ];
