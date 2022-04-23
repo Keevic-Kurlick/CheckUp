@@ -9,6 +9,9 @@ class PatientPassportSeries implements ValueObjectInterface
     /** @var string */
     private string $patientPassportSeries;
 
+    /** @var string NAME */
+    private const NAME = 'Серия паспорта пациента';
+
     /** @var string */
     private const TEMPLATE_KEY = '${patientPassportSeries}';
 
@@ -18,6 +21,14 @@ class PatientPassportSeries implements ValueObjectInterface
     public function __construct(string $patientPassportSeries)
     {
         $this->patientPassportSeries = $patientPassportSeries;
+    }
+
+    /**
+     * @return string
+     */
+    public static function getName(): string
+    {
+        return self::NAME;
     }
 
     /**
@@ -39,7 +50,7 @@ class PatientPassportSeries implements ValueObjectInterface
     /**
      * @return string
      */
-    public function getTemplateKey(): string
+    public static function getTemplateKey(): string
     {
         return self::TEMPLATE_KEY;
     }

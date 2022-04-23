@@ -5,6 +5,11 @@ namespace App\Services\DocxProcessor\Interfaces\ValueObjects;
 interface ValueObjectInterface
 {
     /**
+     * @return string
+     */
+    public static function getName(): string;
+
+    /**
      * @return mixed
      */
     public function getValue(): mixed;
@@ -17,5 +22,5 @@ interface ValueObjectInterface
     /**
      * @return string
      */
-    public function getTemplateKey(): string;
+    public static function getTemplateKey(): string;
 }

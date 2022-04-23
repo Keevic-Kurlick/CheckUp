@@ -35,7 +35,9 @@ class MedicalCertificatesController extends Controller
      */
     public function create(): \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\Foundation\Application
     {
-        return view('admin.medical_certificates.create');
+        $medicalCertificateTemplateParams = $this->medicalCertificatesManager->getMedicalCertificatesTemplateParams();
+
+        return view('admin.medical_certificates.create', compact('medicalCertificateTemplateParams'));
     }
 
     /**

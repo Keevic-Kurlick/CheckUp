@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin\MedicalCertificates;
 use App\Http\Requests\Admin\MedicalCertificates\StoreMedicalCertificateRequest;
 use App\Http\Requests\Admin\MedicalCertificates\UpdateMedicalCertificateRequest;
 use App\Models\MedicalCertificate;
+use App\Services\DocxProcessor\DTO\MedicalCertificateDocxParamsDTO;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
@@ -64,5 +65,15 @@ class MedicalCertificatesManager
         $medicalCertificate->delete();
 
         DB::commit();
+    }
+
+    /**
+     * @return array
+     */
+    public function getMedicalCertificatesTemplateParams(): array
+    {
+        $medicalCertificateTemplateParams = MedicalCertificateDocxParamsDTO::getTemplateParams();
+
+        return $medicalCertificateTemplateParams;
     }
 }
