@@ -29,7 +29,7 @@
                         @csrf
 
                         <div class="row">
-                            <div class="col-6">
+                            <div class="col-12 col-md-6">
                                 <div class="form-group">
                                     <label for="medical_certificate_name">{{ __('admin.medical_certificates.pages.create.medical_certificate_name') }}</label>
                                     <input class="form-control @error('medical_certificate_name') is-invalid @enderror"
@@ -53,14 +53,14 @@
                                 </div>
                             </div>
 
-                            <div class="card col-6">
+                            <div class="card col-12 col-md-6">
                                 <div class="form-group">
                                     <label for="medical_certificate_template">{{ __('admin.medical_certificates.pages.create.medical_certificate_template') }}</label>
                                     <input type="file" class="form-control-file" id="medical_certificate_template">
                                     <x-show-error field-name="medical_certificate_description" />
                                 </div>
-                                <div class="template-params">
-                                    <p>{{ __('admin.medical_certificates.pages.create.medical_certificate_template_params') }}</p>
+                                <div class="template-params small">
+                                    <span>{{ __('admin.medical_certificates.pages.create.medical_certificate_template_params') }}</span>
                                     @if(!empty($medicalCertificateTemplateParams))
                                         <ul>
                                             @foreach ($medicalCertificateTemplateParams as $medicalCertificateTemplateParamKey => $medicalCertificateTemplateParamName)
