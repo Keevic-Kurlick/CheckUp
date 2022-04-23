@@ -9,12 +9,19 @@ use PhpOffice\PhpWord\TemplateProcessor;
 
 class DocxProcessorService implements DocxProcessorInterface
 {
+    /** @var BaseDocxParamsDTO $docxProcessorDTO */
+    private BaseDocxParamsDTO $docxProcessorDTO;
+
     /**
      * @param BaseDocxParamsDTO $docxProcessorDTO
+     * @return DocxProcessorService
      */
-    public function __construct(
-        private BaseDocxParamsDTO $docxProcessorDTO
-    ) {}
+    public function setDocxProcessorDTO(BaseDocxParamsDTO $docxProcessorDTO): static
+    {
+        $this->setDocxProcessorDTO($docxProcessorDTO);
+
+        return $this;
+    }
 
     /**
      * @return string
