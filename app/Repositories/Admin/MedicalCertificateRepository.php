@@ -56,9 +56,23 @@ class MedicalCertificateRepository extends BaseRepository
     }
 
     /**
+     * @param int $id
+     * @return mixed
+     */
+    public function getMedicalCertificateToServiceEditById(int $id): mixed
+    {
+        $medicalCertificate = $this->startCondition()
+            ->select(['id'])
+            ->findOrFail($id)
+            ->toArray();
+
+        return $medicalCertificate;
+    }
+
+    /**
      * @return string
      */
-    protected function getModelClass()
+    protected function getModelClass(): string
     {
         return Model::class;
     }

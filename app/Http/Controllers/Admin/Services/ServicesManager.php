@@ -40,9 +40,10 @@ class ServicesManager
 
             Service::whereId($id)
                 ->update([
-                    'name'          => $request->service_name,
-                    'description'   => $request->service_description,
-                    'price'         => $request->service_price,
+                    'name'                  => $request->service_name,
+                    'description'           => $request->service_description,
+                    'price'                 => $request->service_price,
+                    'medical_certificate'   => $request->service_medical_certificate,
                 ]);
 
         DB::commit();

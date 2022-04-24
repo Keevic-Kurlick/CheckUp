@@ -76,6 +76,8 @@
                                     @endforeach
                                 </select>
                             @endif
+
+                            <x-show-error field-name="service_medical_certificate" />
                         </div>
 
                         <div class="form-group">

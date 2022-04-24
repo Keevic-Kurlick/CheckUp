@@ -86,8 +86,9 @@ class ServicesController extends Controller
     public function edit(int $id)
     {
         $service = $this->serviceRepository->findServiceByIdToEdit($id);
+        $medicalCertificates = $this->medicalCertificateRepository->getMedicalCertificatesToCreateService();
 
-        return view('admin.services.edit', compact('service'));
+        return view('admin.services.edit', compact('service', 'medicalCertificates'));
     }
 
     /**
