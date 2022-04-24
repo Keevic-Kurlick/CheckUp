@@ -22,7 +22,7 @@ class StoreMedicalCertificateRequest extends FormRequest
         return [
             'medical_certificate_name'          => 'required|string',
             'medical_certificate_description'   => 'required|string',
-            'medical_certificate_template'      => 'file|mimes:doc,docx',
+            'medical_certificate_template'      => 'required|file|mimes:doc,docx',
         ];
     }
 
