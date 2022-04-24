@@ -55,6 +55,9 @@
                                     <img src="{{ asset('storage/logos/home.svg') }}" alt="Кабинет" height="35">
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    @can('hasAccessToAdminPanel', \App\Models\User::class)
+                                        <li><a class="dropdown-item" href="{{ route('admin.index') }}">Админ панель</a></li>
+                                    @endcan
                                     <li><a class="dropdown-item" href="{{ route('profile.orders.list') }}">Заказы</a></li>
                                     <li><a class="dropdown-item" href="{{ route('profile.documents') }}">Документы</a></li>
                                     <li><a class="dropdown-item" href="{{ route('profile.settings') }}">Настройки</a></li>

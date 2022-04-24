@@ -22,6 +22,7 @@ class ServicesManager
         $service->name = $request->service_name;
         $service->description = $request->service_description;
         $service->price = $request->service_price;
+        $service->medical_certificate = $request->service_medical_certificate;
         $service->save();
 
         DB::commit();
@@ -39,9 +40,10 @@ class ServicesManager
 
             Service::whereId($id)
                 ->update([
-                    'name'          => $request->service_name,
-                    'description'   => $request->service_description,
-                    'price'         => $request->service_price,
+                    'name'                  => $request->service_name,
+                    'description'           => $request->service_description,
+                    'price'                 => $request->service_price,
+                    'medical_certificate'   => $request->service_medical_certificate,
                 ]);
 
         DB::commit();

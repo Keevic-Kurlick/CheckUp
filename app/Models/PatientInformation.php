@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $snils
  * @method static whereId(int $id)
  */
-class Patient_information extends Model
+class PatientInformation extends Model
 {
     use HasFactory;
 

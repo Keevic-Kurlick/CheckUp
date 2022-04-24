@@ -1,6 +1,7 @@
 @php
     /**
-    * @var \App\Models\Service $service
+    * @var array $service
+    * @var \App\Models\MedicalCertificate[] $medicalCertificates
     */
 @endphp
 
@@ -25,7 +26,7 @@
         <div class="edit-services">
             <div class="row">
                 <div class="col-12">
-                    <form action="{{ route('admin.services.update', $service->id) }}" method="post">
+                    <form action="{{ route('admin.services.update', $service['id']) }}" method="post">
                         @csrf
                         @method('patch')
                         <div class="form-group">
@@ -34,7 +35,7 @@
                                    type="text"
                                    id="service_name"
                                    name="service_name"
-                                   value="{{ $service->name }}">
+                                   value="{{ $service['name'] }}">
 
                             <x-show-error field-name="service_name" />
                         </div>
@@ -44,9 +45,43 @@
                             <textarea class="form-control @error('service_description') is-invalid @enderror"
                                       id="service_description"
                                       name="service_description">
-                                {{ $service->description }}
+                                {{ $service['description'] }}
                             </textarea>
                             <x-show-error field-name="service_description" />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="service_medical_certificate">
+                                {{ __('admin.services.pages.edit.service_medical_certificate.label') }}
+                            </label>
+                            @if(empty($medicalCertificates))
+                                {{ __('admin.services.pages.edit.service_medical_certificate.empty') }}
+                            @else
+                                <select name="service_medical_certificate"
+                                        class="form-control"
+                                        id="service_medical_certificate">
+                                    <option value=""
+                                            @if(empty(old('service_medical_certificate')))
+                                            selected
+                                            @endif>
+                                        Выберите справку...
+                                    </option>
+
+                                    @foreach($medicalCertificates as $medicalCertificate)
+                                        <option value="{{ $medicalCertificate->id }}"
+                                                @if(
+                                                    old('service_medical_certificate') == $medicalCertificate->id
+                                                    || $service['medical_certificate']['id'] == $medicalCertificate->id
+                                                )
+                                                    selected
+                                                @endif>
+                                            {{ $medicalCertificate['name'] }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            @endif
+
+                            <x-show-error field-name="service_medical_certificate" />
                         </div>
 
                         <div class="form-group">
@@ -55,7 +90,7 @@
                                    type="number"
                                    id="service_price"
                                    name="service_price"
-                                   value="{{ $service->price }}"
+                                   value="{{ $service['price'] }}"
                             >
 
                             <x-show-error field-name="service_price" />

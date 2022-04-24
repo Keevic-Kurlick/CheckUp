@@ -54,7 +54,7 @@ class User extends Authenticatable
      */
     public function patientInformation(): \Illuminate\Database\Eloquent\Relations\HasOne
     {
-        return $this->hasOne(Patient_information::class);
+        return $this->hasOne(PatientInformation::class);
     }
 
     /**

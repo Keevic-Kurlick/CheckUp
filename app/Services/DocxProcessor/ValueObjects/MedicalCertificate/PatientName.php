@@ -9,6 +9,9 @@ class PatientName implements ValueObjectInterface
     /** @var string */
     private string $patientName;
 
+    /** @var string NAME */
+    private const NAME = 'ФИО пациента';
+
     /** @var string */
     private const TEMPLATE_KEY = '${patientName}';
 
@@ -18,6 +21,14 @@ class PatientName implements ValueObjectInterface
     public function __construct(string $patientName)
     {
         $this->patientName = $patientName;
+    }
+
+    /**
+     * @return string
+     */
+    public static function getName(): string
+    {
+        return self::NAME;
     }
 
     /**
@@ -39,7 +50,7 @@ class PatientName implements ValueObjectInterface
     /**
      * @return string
      */
-    public function getTemplateKey(): string
+    public static function getTemplateKey(): string
     {
         return self::TEMPLATE_KEY;
     }

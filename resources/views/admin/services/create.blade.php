@@ -1,5 +1,12 @@
 @extends('admin.base_admin_template')
 
+@php
+/**
+ * @var \App\Models\MedicalCertificate[] $medicalCertificates
+ * [id, name]
+ */
+@endphp
+
 @section('title', __('admin.services.titles.services_create'))
 
 @section('content_header')
@@ -40,6 +47,37 @@
                                       name="service_description">
                             </textarea>
                             <x-show-error field-name="service_description" />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="service_medical_certificate">
+                                {{ __('admin.services.pages.create.service_medical_certificate.label') }}
+                            </label>
+                            @if(empty($medicalCertificates))
+                                {{ __('admin.services.pages.create.service_medical_certificate.empty') }}
+                            @else
+                                <select name="service_medical_certificate"
+                                        class="form-control"
+                                        id="service_medical_certificate">
+                                    <option value=""
+                                            @if(empty(old('service_medical_certificate')))
+                                                selected
+                                            @endif>
+                                        Выберите справку...
+                                    </option>
+
+                                    @foreach($medicalCertificates as $medicalCertificate)
+                                        <option value="{{ $medicalCertificate->id }}"
+                                                @if(old('service_medical_certificate') == $medicalCertificate->id)
+                                                    selected
+                                                @endif>
+                                            {{ $medicalCertificate->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            @endif
+
+                            <x-show-error field-name="service_medical_certificate" />
                         </div>
 
                         <div class="form-group">

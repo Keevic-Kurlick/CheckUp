@@ -180,6 +180,8 @@ return [
         * Own Service Providers
         */
         App\Providers\PdfConverterProvider::class,
+        App\Providers\DocxProcessorServiceProvider::class,
+        App\Providers\MedicalCertificateServiceProvider::class,
     ],
 
     /*

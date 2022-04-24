@@ -7,6 +7,14 @@ use App\Repositories\BaseRepository;
 
 class ServiceRepository extends BaseRepository
 {
+    /** @var MedicalCertificateRepository|\Illuminate\Contracts\Foundation\Application|mixed */
+    private MedicalCertificateRepository $medicalCertificateRepository;
+
+    public function __construct() {
+        parent::__construct();
+        $this->medicalCertificateRepository = app(MedicalCertificateRepository::class);
+    }
+
     /**
      * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
      */
@@ -22,11 +30,19 @@ class ServiceRepository extends BaseRepository
 
     /**
      * @param int $id
-     * @return mixed
+     * @return array
      */
-    public function findServiceByIdToEdit(int $id)
+    public function findServiceByIdToEdit(int $id): array
     {
-        $service = $this->startCondition()->findOrFail($id);
+        /** @var array $service */
+        $service = $this->startCondition()
+            ->findOrFail($id)
+            ->toArray();
+
+        $medicalCertificate = $this->medicalCertificateRepository
+            ->getMedicalCertificateToServiceEditById($service['medical_certificate']);
+
+        $service['medical_certificate'] = $medicalCertificate;
 
         return $service;
     }

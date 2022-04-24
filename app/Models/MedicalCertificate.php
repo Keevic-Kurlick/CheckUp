@@ -6,13 +6,21 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
+ * @property int id
  * @property string $name
  * @property string $description
  * @property string $template_path
  * @method static string whereName()
  * @method static string whereTemplatePath()
  */
-class Medical_certificate extends Model
+class MedicalCertificate extends Model
 {
     use HasFactory;
+
+    /** @var string[] $fillable */
+    protected $fillable  = [
+        'name',
+        'description',
+        'template_path',
+    ];
 }
