@@ -49,7 +49,7 @@ Route::group(['prefix' => 'profile', 'middleware' => 'auth'], function () {
 Route::name('admin.')->prefix('admin')->middleware('admin')->group(function() {
     Route::get('/', function () {
         return view('admin.dashboard');
-    });
+    })->name('index');
 
     Route::get('/users/roles/edit', [\App\Http\Controllers\Admin\Users\Roles\RoleController::class, 'editRolesView'])
         ->name('users.roles.edit');
