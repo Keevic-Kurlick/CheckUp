@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\MedicalCertificates;
 
 use App\Http\Controllers\Admin\MedicalCertificates\Exceptions\ErrorSavingMedicalCertificateException;
+use App\Http\Controllers\Admin\MedicalCertificates\Exceptions\MedicalCertificateDestroyDeleteTemplateException;
 use App\Http\Controllers\Admin\MedicalCertificates\Exceptions\SavingMedicalCertificateTemplateException;
 use App\Http\Requests\Admin\MedicalCertificates\StoreMedicalCertificateRequest;
 use App\Http\Requests\Admin\MedicalCertificates\UpdateMedicalCertificateRequest;
@@ -142,6 +143,20 @@ class MedicalCertificatesManager
 
         /** @var MedicalCertificate|ModelNotFoundException $medicalCertificate */
         $medicalCertificate = MedicalCertificate::findOrFail($id);
+
+        $pathToTemplate         = $medicalCertificate->template_path;
+        $isExistTemplateFile    = Storage::exists($pathToTemplate);
+
+        if ($isExistTemplateFile) {
+            $isDeletedMedicalCertificateTemplate = $this->deleteMedicalCertificateTemplate($pathToTemplate);
+
+            if (empty($isDeletedMedicalCertificateTemplate)) {
+                throw new MedicalCertificateDestroyDeleteTemplateException(
+                    'Medical certificate template was not deleted.'
+                );
+            }
+        }
+
         $medicalCertificate->delete();
 
         DB::commit();
