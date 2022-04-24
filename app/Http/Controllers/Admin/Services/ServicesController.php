@@ -5,14 +5,21 @@ namespace App\Http\Controllers\Admin\Services;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Services\StoreServiceRequest;
 use App\Http\Requests\Admin\Services\UpdateServiceRequest;
+use App\Repositories\Admin\MedicalCertificateRepository;
 use App\Repositories\Admin\ServiceRepository;
 use Illuminate\Support\Facades\Log;
 
 class ServicesController extends Controller
 {
+    /**
+     * @param ServiceRepository $serviceRepository
+     * @param ServicesManager $servicesManager
+     * @param MedicalCertificateRepository $medicalCertificateRepository
+     */
     public function __construct(
         private ServiceRepository $serviceRepository,
-        private ServicesManager $servicesManager
+        private ServicesManager $servicesManager,
+        private MedicalCertificateRepository $medicalCertificateRepository
     ){}
 
     /**
@@ -30,7 +37,9 @@ class ServicesController extends Controller
      */
     public function create()
     {
-        return view('admin.services.create');
+        $medicalCertificates = $this->medicalCertificateRepository->getMedicalCertificatesToCreateService();
+
+        return view('admin.services.create', compact('medicalCertificates'));
     }
 
     /**

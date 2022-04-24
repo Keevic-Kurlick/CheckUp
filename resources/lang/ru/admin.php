@@ -18,7 +18,11 @@ return [
                 'service_name'          => 'Наименование',
                 'service_description'   => 'Описание',
                 'service_price'         => 'Цена',
-            ]
+                'service_medical_certificate' => [
+                    'empty' => 'На данный момент не создано ни одной справки.',
+                    'label' => 'Справка',
+                ],
+            ],
         ],
     ],
     'medical_certificates' => [
