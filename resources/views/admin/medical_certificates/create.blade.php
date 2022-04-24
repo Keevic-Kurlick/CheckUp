@@ -25,7 +25,9 @@
         <div class="create-medical_certificate">
             <div class="row">
                 <div class="col-12">
-                    <form action="{{ route('admin.medical_certificates.store') }}" method="post">
+                    <form action="{{ route('admin.medical_certificates.store') }}"
+                          method="post"
+                          enctype="multipart/form-data">
                         @csrf
 
                         <div class="row">
@@ -55,9 +57,10 @@
 
                             <div class="card col-12 col-md-6">
                                 <div class="form-group">
-                                    <label for="medical_certificate_template">{{ __('admin.medical_certificates.pages.create.medical_certificate_template') }}</label>
-                                    <input type="file" class="form-control-file" id="medical_certificate_template">
-                                    <x-show-error field-name="medical_certificate_description" />
+                                    <label for="medical_certificate_template">{{ __('admin.medical_certificates.pages.create.medical_certificate_template_label') }}</label>
+                                    <input type="file" class="form-control-file"
+                                           name="medical_certificate_template" id="medical_certificate_template">
+                                    <x-show-error field-name="medical_certificate_template" />
                                 </div>
                                 <div class="template-params small">
                                     <span>{{ __('admin.medical_certificates.pages.create.medical_certificate_template_params') }}</span>

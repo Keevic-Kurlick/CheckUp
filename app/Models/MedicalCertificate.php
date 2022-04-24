@@ -20,5 +20,6 @@ class MedicalCertificate extends Model
     protected $fillable  = [
         'name',
         'description',
+        'template_path',
     ];
 }

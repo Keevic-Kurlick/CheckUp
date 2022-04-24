@@ -30,7 +30,8 @@ return [
             'create' => [
                 'medical_certificate_name'              => 'Наименование',
                 'medical_certificate_description'       => 'Описание',
-                'medical_certificate_template'          => 'Загрузите шаблон справки',
+                'medical_certificate_template'          => 'Шаблон справки',
+                'medical_certificate_template_label'    => 'Загрузите шаблон справки',
                 'medical_certificate_template_params'   => 'Список разрешённых переменных шаблона:'
             ],
             'edit' => [
