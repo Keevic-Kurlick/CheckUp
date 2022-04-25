@@ -10,12 +10,14 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $passport_number
  * @property string $inn
  * @property string $snils
+ * @property int    $patient_id
  * @method static whereId(int $id)
  */
 class PatientInformation extends Model
 {
     use HasFactory;
 
+    /** @var string[] */
     protected $fillable = [
         'passport_series',
         'passport_number',
@@ -23,6 +25,7 @@ class PatientInformation extends Model
         'snils'
     ];
 
+    /** @var string */
     protected $table = 'patient_information';
 
     /**
@@ -30,6 +33,6 @@ class PatientInformation extends Model
      */
     public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'patient_id', 'id');
     }
 }
