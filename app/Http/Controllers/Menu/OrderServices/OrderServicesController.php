@@ -33,7 +33,7 @@ class OrderServicesController extends Controller
             $response = redirect()->back();
         }
 
-        $notifyMessage = __("admin.notifications.medical_certificate.medical_certificate_was_created.{$notifyMessageStatus}");
+        $notifyMessage = __("pages.order_services.store.{$notifyMessageStatus}");
         toastr()->$notifyMessageStatus($notifyMessage);
 
         return $response;
