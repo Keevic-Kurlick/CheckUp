@@ -34,6 +34,18 @@ class UserRepository extends BaseRepository
         return $users;
     }
 
+    /**
+     * @param int $id
+     * @return mixed
+     */
+    public function getUserToShowServiceById(int $id): mixed
+    {
+        $user = $this->startCondition()
+            ->with(['patientInformation'])
+            ->find($id);
+
+        return $user;
+    }
 
     /**
      * @return string

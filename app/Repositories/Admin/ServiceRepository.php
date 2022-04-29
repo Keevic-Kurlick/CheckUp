@@ -48,6 +48,17 @@ class ServiceRepository extends BaseRepository
     }
 
     /**
+     * @param int $serviceId
+     * @return mixed
+     */
+    public function getServiceToShow(int $serviceId): mixed
+    {
+        $service = $this->startCondition()->find($serviceId);
+
+        return $service;
+    }
+
+    /**
      * @return string
      */
     protected function getModelClass()
