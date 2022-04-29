@@ -6,7 +6,6 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\UploadedFile;
 
 /**
- * @property-read string          $patient_name
  * @property-read string          $passport_series
  * @property-read string          $passport_number
  * @property-read string          $patient_inn
@@ -30,7 +29,6 @@ class CreateOrderRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'patient_name'          => 'required|string',
             'passport_series'       => 'required|string|size:4',
             'passport_number'       => 'required|string|size:6',
             'patient_inn'           => 'required|string|size:13',
@@ -46,7 +44,6 @@ class CreateOrderRequest extends FormRequest
     public function attributes()
     {
         return [
-            'patient_name'          => 'ФИО',
             'passport_series'       => 'Серия паспорта',
             'passport_number'       => 'Номер паспорта',
             'patient_inn'           => 'ИНН',

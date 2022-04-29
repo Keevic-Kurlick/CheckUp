@@ -44,7 +44,6 @@ class OrderServicesManager
 
         $currentPatient = Auth::user();
 
-        $patientName            = $request->patient_name;
         $passportSeries         = $request->passport_series;
         $passportNumber         = $request->passport_number;
         $patientInn             = $request->patient_inn;
