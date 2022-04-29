@@ -66,7 +66,7 @@ class OrderServicesManager
             $this->storeAnalysisScan($patientAnalysisScan, $pathToSaveScans);
 
             $orderInformation = new OrderInformation();
-            $orderInformation->passport_seriess = $passportSeries;
+            $orderInformation->passport_series = $passportSeries;
             $orderInformation->passport_number = $passportNumber;
             $orderInformation->inn = $patientInn;
             $orderInformation->snils = $patientSnils;
