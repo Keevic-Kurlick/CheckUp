@@ -24,11 +24,14 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::group(['prefix' => 'menu'], function () {
 
-    Route::get('/services', [App\Http\Controllers\Menu\ServicesController::class, 'servicesList'])
+    Route::get('/services', [\App\Http\Controllers\Menu\Services\ServicesController::class, 'servicesList'])
         ->name('menu.services.list');
 
-    Route::middleware( 'auth')->post('/orders/create', [\App\Http\Controllers\Menu\OrdersController::class, 'store'])
-        ->name('menu.orders.store');
+    Route::get('/services/{id}', [\App\Http\Controllers\Menu\Services\ServicesController::class, 'show'])
+        ->name('menu.services.show');
+
+    Route::middleware( 'auth')->post('/services/{id}/order/create', [App\Http\Controllers\Menu\OrderServices\OrderServicesController::class, 'store'])
+        ->name('menu.services.order.create');
 });
 
 Route::group(['prefix' => 'profile', 'middleware' => 'auth'], function () {

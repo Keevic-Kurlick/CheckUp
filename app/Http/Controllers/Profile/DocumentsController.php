@@ -36,6 +36,7 @@ class DocumentsController extends Controller
         $patientInformation->passport_number = $passport_number;
         $patientInformation->inn             = $patient_inn;
         $patientInformation->snils           = $patient_snils;
+        $patientInformation->patient_id      = $patient->id;
         $patientInformation->save();
 
         if (empty($patient->patientinfo_id)) {

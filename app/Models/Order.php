@@ -6,10 +6,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
-/**
+/**s
+ * @property int    $id
  * @property string $status
- * @property int $patient_id
- * @property int $service_id
+ * @property int    $patient_id
+ * @property int    $service_id
  * @method static wherePatientId(int $patientId)
  */
 class Order extends Model

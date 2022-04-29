@@ -13,8 +13,7 @@ const mix = require('laravel-mix');
 
 mix.js('resources/js/app.js', 'public/js')
     .vue()
-    .js('resources/js/menu/services.js', 'public/js/menu/services.js')
-    .js('resources/js/profile/documents.js', 'public/js/profile/documents.js')
+    .js('resources/js/elements/input_masks.js', 'public/js/elements/input_masks.js')
     .js('resources/js/admin/services/destroy.js', 'public/js/admin/services/destroy.js')
     .js('resources/js/admin/medical_certificates/destroy.js', 'public/js/admin/medical_certificates/destroy.js')
     .sass('resources/sass/app.scss', 'public/css')
