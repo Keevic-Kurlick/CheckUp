@@ -24,4 +24,19 @@ class UserPolicy
 
         return $response;
     }
+
+    /**
+     * @param User $user
+     * @return bool
+     */
+    public function hasAccessToOrderService(User $user): bool
+    {
+        $response = false;
+
+        if (!empty($user)) {
+            $response = true;
+        }
+
+        return $response;
+    }
 }
