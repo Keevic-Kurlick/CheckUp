@@ -20,7 +20,7 @@ class CreateOrderRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return $this->user()->can('hasAccessToOrderService');
+        return $this->user()->can('hasAccessToOrderService', \App\Models\User::class);
     }
 
     /**
