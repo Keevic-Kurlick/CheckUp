@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\Profile\OrdersController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -36,7 +35,7 @@ Route::group(['prefix' => 'menu'], function () {
 
 Route::group(['prefix' => 'profile', 'middleware' => 'auth'], function () {
 
-    Route::get('/orders', [OrdersController::class, 'ordersList'])
+    Route::get('/orders', [App\Http\Controllers\Profile\OrdersController::class, 'ordersList'])
         ->name('profile.orders.list');
 
     Route::get('settings', [\App\Http\Controllers\Profile\SettingsController::class, 'settings'])
@@ -47,6 +46,11 @@ Route::group(['prefix' => 'profile', 'middleware' => 'auth'], function () {
 
     Route::post('documents/store', [\App\Http\Controllers\Profile\DocumentsController::class, 'store'])
         ->name('profile.documents.store');
+});
+
+Route::middleware('doctor')->group(function () {
+    Route::get('orders', [\App\Http\Controllers\Orders\OrdersController::class, 'index'])
+        ->name('orders.index');
 });
 
 Route::name('admin.')->prefix('admin')->middleware('admin')->group(function() {
