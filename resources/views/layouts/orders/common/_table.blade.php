@@ -18,12 +18,12 @@
         </thead>
         <tbody>
         @forelse($orders as $order)
-            <tr class="order-block white-space-nowrap">
+            <tr class="order-block white-space-nowrap" id="order-{{$order->id}}">
                 <td>
                     {{ $order->id }}
                 </td>
                 <td>
-                    {{ $order->service_name }}
+                    <a href="{{ route('orders.show', $order->id) }}">{{ $order->service_name }}</a>
                 </td>
                 <td>
                     {{ $order->doctor_name ?? '' }}

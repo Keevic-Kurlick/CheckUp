@@ -51,6 +51,15 @@ Route::group(['prefix' => 'profile', 'middleware' => 'auth'], function () {
 Route::middleware('doctor')->group(function () {
     Route::get('orders', [\App\Http\Controllers\Orders\OrdersController::class, 'index'])
         ->name('orders.index');
+
+    Route::get('orders/{orderId}', [\App\Http\Controllers\Orders\OrdersController::class, 'show'])
+        ->name('orders.show');
+
+    Route::post('orders/{orderId}/next-step', [\App\Http\Controllers\Orders\OrdersController::class, 'nextStep'])
+        ->name('orders.next-step');
+
+    Route::post('orders/{orderId}/cancel', [\App\Http\Controllers\Orders\OrdersController::class, 'cancel'])
+        ->name('orders.cancel');
 });
 
 Route::name('admin.')->prefix('admin')->middleware('admin')->group(function() {

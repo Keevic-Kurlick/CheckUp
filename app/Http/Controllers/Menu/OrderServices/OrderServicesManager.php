@@ -62,6 +62,12 @@ class OrderServicesManager
 
             $pathToSaveScans = $this->getPathToSaveScans($order->id);
 
+            $fullPathToPassport = $pathToSaveScans
+                . $this->getFullScanName($patientPassportScan, self::SCAN_NAME_PASSPORT);
+
+            $fullPathToAnalysis = $pathToSaveScans
+                . $this->getFullScanName($patientPassportScan, self::SCAN_NAME_ANALYSIS);
+
             $this->storePassportScan($patientPassportScan, $pathToSaveScans);
             $this->storeAnalysisScan($patientAnalysisScan, $pathToSaveScans);
 
@@ -70,6 +76,8 @@ class OrderServicesManager
             $orderInformation->passport_number = $passportNumber;
             $orderInformation->inn = $patientInn;
             $orderInformation->snils = $patientSnils;
+            $orderInformation->passport_path = $fullPathToPassport;
+            $orderInformation->analysis_path = $fullPathToAnalysis;
             $orderInformation->save();
 
             $order->update([
@@ -233,7 +241,7 @@ class OrderServicesManager
      */
     private function getPathToSaveScans(int $orderId): string
     {
-        return $this->getPathToOrderStorage($orderId) . '/userInfo';
+        return $this->getPathToOrderStorage($orderId) . '/userInfo/';
     }
 
     /**

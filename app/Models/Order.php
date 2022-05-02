@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\DB;
  * @property string $status
  * @property int    $patient_id
  * @property int    $service_id
+ * @method static whereId(int $orderId)
  * @method static wherePatientId(int $patientId)
  */
 class Order extends Model
@@ -37,6 +38,14 @@ class Order extends Model
         self::CANCEL_STATUS,
     ];
 
+    /** @var string */
+    public const ADDITIONAL_STEP_MAKE_MEDICAL_CERTIFICATE = 'make_analysis';
+
+    /** @var string[] */
+    public const ADDITIONAL_STEPS = [
+        self::ADDITIONAL_STEP_MAKE_MEDICAL_CERTIFICATE,
+    ];
+
     /** @var array|string[]  */
     public const STATUS_MAP = [
         self::AWAIT_STATUS => 'В ожидании',
@@ -45,15 +54,38 @@ class Order extends Model
         self::CANCEL_STATUS => 'Отклонено',
     ];
 
-    protected $fillable = [
-        'status',
+    /** @var string[] */
+    public const MAP_STEPS_NAMES_ACTION = [
+        self::IN_PROGRESS_STATUS            => 'Взять в работу',
+        self::COMPLETE_STATUS               => 'Завершить',
+        self::CANCEL_STATUS                 => 'Отменить',
+        self::ADDITIONAL_STEP_MAKE_MEDICAL_CERTIFICATE => 'Сформировать справку'
+    ];
+
+    /** @var string[] */
+    public const MAP_STEPS_BUTTON_COLOR = [
+        self::IN_PROGRESS_STATUS                => 'info',
+        self::COMPLETE_STATUS                   => 'success',
+        self::CANCEL_STATUS                     => 'warning',
+        self::ADDITIONAL_STEP_MAKE_MEDICAL_CERTIFICATE     => 'info',
     ];
 
     /**
+     * @var string[]
+     */
+    protected $fillable = [
+        'status',
+        'doctor_id',
+        'orderInfo_id',
+    ];
+
+    /**
+     * @param $patient
      * @param $service
      * @return Order
+     * @throws \Throwable
      */
-    public static function create($patient, $service)
+    public static function create($patient, $service): Order
     {
         DB::beginTransaction();
 
