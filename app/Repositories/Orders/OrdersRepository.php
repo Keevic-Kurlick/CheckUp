@@ -46,6 +46,18 @@ class OrdersRepository extends BaseRepository
     }
 
     /**
+     * @param int $orderId
+     * @return Model
+     */
+    public function getOrderByIdToCancel(int $orderId): Model
+    {
+        $order = $this->getOrderQuery()
+            ->findOrFail($orderId);
+
+        return $order;
+    }
+
+    /**
      * @return mixed
      */
     private function getOrderQuery(): mixed

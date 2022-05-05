@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Orders;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Orders\CancelOrderRequest;
 use App\Http\Requests\Orders\NextStepOrderRequest;
 use App\Repositories\Orders\OrdersRepository;
 use Illuminate\Http\Request;
@@ -94,7 +95,7 @@ class OrdersController extends Controller
             $notifyMessageStatus = 'error';
 
             \Log::info('App.Http.Controllers.Orders.OrdersController.nextStep', [
-                'message' => 'Order not found.',
+                'message' => 'Order processing error.',
                 'data' => [
                     'order_id' => $orderId,
                     'doctor_id' => $currentDoctor,
@@ -106,6 +107,38 @@ class OrdersController extends Controller
         $step = $request->step;
 
         $notifyMessage = __("pages.orders.nextStep.statuses.$step.$notifyMessageStatus");
+        toastr()->$notifyMessageStatus($notifyMessage);
+
+        return redirect()->back();
+    }
+
+    /**
+     * @param CancelOrderRequest $request
+     * @param int $orderId
+     * @return \Illuminate\Routing\Route|object|string|void|null
+     * @throws \Throwable
+     */
+    public function cancel(CancelOrderRequest $request, int $orderId)
+    {
+        $notifyMessageStatus = 'success';
+
+        try {
+            $order = $this->ordersRepository->getOrderByIdToCancel($orderId);
+            $this->ordersManager->cancelOrder($request, $order);
+        } catch (\Exception $e) {
+
+            \Log::info('App.Http.Controllers.Orders.OrdersController.cancel', [
+                'message' => 'Order cancellation error.',
+                'data' => [
+                    'order_id' => $orderId,
+                    'exception_message' => $e->getMessage(),
+                ],
+            ]);
+
+            $notifyMessageStatus = 'error';
+        }
+
+        $notifyMessage = __("pages.orders.cancel.$notifyMessageStatus");
         toastr()->$notifyMessageStatus($notifyMessage);
 
         return redirect()->back();
