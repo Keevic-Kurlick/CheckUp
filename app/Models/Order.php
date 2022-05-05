@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\DB;
 
 /**s
@@ -16,7 +17,7 @@ use Illuminate\Support\Facades\DB;
  */
 class Order extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
     /** @var string  */
     public const AWAIT_STATUS        = 'await';
@@ -58,7 +59,7 @@ class Order extends Model
     public const MAP_STEPS_NAMES_ACTION = [
         self::IN_PROGRESS_STATUS            => 'Взять в работу',
         self::COMPLETE_STATUS               => 'Завершить',
-        self::CANCEL_STATUS                 => 'Отменить',
+        self::CANCEL_STATUS                 => 'Отказать',
         self::ADDITIONAL_STEP_MAKE_MEDICAL_CERTIFICATE => 'Сформировать справку'
     ];
 
