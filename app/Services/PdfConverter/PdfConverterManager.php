@@ -24,12 +24,14 @@ class PdfConverterManager implements PdfConverterManagerInterface
     }
 
     /**
-     * @return void
+     * @return string
      */
-    public function convert(): void
+    public function convert(): string
     {
-        $this->pdfConverter
+        $pathToConvertedFile = $this->pdfConverter
             ->setPdfConverterDTO($this->pdfConverterDTO)
             ->run();
+
+        return $pathToConvertedFile;
     }
 }

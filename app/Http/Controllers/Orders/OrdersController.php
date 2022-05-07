@@ -97,8 +97,9 @@ class OrdersController extends Controller
             \Log::info('App.Http.Controllers.Orders.OrdersController.nextStep', [
                 'message' => 'Order processing error.',
                 'data' => [
-                    'order_id' => $orderId,
-                    'doctor_id' => $currentDoctor,
+                    'order_id'          => $orderId,
+                    'doctor_id'         => $currentDoctor,
+                    'step'              => $request->step,
                     'exception_message' => $e->getMessage(),
                 ],
             ]);

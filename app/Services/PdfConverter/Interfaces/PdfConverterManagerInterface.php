@@ -5,7 +5,7 @@ namespace App\Services\PdfConverter\Interfaces;
 interface PdfConverterManagerInterface
 {
     /**
-     * @return void
+     * @return string
      */
-    public function convert(): void;
+    public function convert(): string;
 }

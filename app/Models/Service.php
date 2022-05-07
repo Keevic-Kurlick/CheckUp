@@ -40,8 +40,8 @@ class Service extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
-    public function certificate(): \Illuminate\Database\Eloquent\Relations\HasOne
+    public function medicalCertificate(): \Illuminate\Database\Eloquent\Relations\HasOne
     {
-        return $this->hasOne(MedicalCertificate::class);
+        return $this->hasOne(MedicalCertificate::class, 'id', 'medical_certificate');
     }
 }

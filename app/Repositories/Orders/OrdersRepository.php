@@ -2,6 +2,8 @@
 
 namespace App\Repositories\Orders;
 
+use App\Models\MedicalCertificate;
+use App\Models\Order;
 use App\Repositories\BaseRepository;
 use App\Models\Order as Model;
 
@@ -27,7 +29,12 @@ class OrdersRepository extends BaseRepository
      */
     public function getOrderByIdToShow(int $orderId): Model
     {
+        /** @var Order $order */
         $order = $this->getOrderQuery()
+            ->addSelect([
+                'users.name as doctor_name',
+            ])
+            ->leftjoin('users', 'orders.doctor_id', '=', 'users.id')
             ->findOrFail($orderId);
 
         return $order;
@@ -40,6 +47,10 @@ class OrdersRepository extends BaseRepository
     public function getOrderByIdToNextStep(int $orderId): Model
     {
         $order = $this->getOrderQuery()
+            ->addSelect([
+                'users.name as patient_name',
+            ])
+            ->leftjoin('users', 'orders.patient_id', '=', 'users.id')
             ->findOrFail($orderId);
 
         return $order;
@@ -58,6 +69,26 @@ class OrdersRepository extends BaseRepository
     }
 
     /**
+     * @param int $orderId
+     * @return MedicalCertificate
+     */
+    public function getMedicalCertificateByOrderId(int $orderId): MedicalCertificate
+    {
+        $medicalCertificate = $this->startCondition()
+            ->with(['service'])
+            ->findOrFail($orderId)
+            ->service
+            ->medicalCertificate()
+            ->select([
+                'name',
+                'template_path'
+            ])
+            ->first();
+
+        return $medicalCertificate;
+    }
+
+    /**
      * @return mixed
      */
     private function getOrderQuery(): mixed
@@ -65,7 +96,6 @@ class OrdersRepository extends BaseRepository
         $orderQuery = $this->startCondition()
             ->select([
                 'orders.*',
-                'users.name as doctor_name',
                 'services.name as service_name',
                 'or.approve_message',
                 'or.cancel_message',
@@ -77,7 +107,6 @@ class OrdersRepository extends BaseRepository
                 'oi.passport_path',
                 'oi.analysis_path',
             ])
-            ->leftjoin('users', 'orders.doctor_id', '=', 'users.id')
             ->join('services', 'orders.service_id', '=', 'services.id')
             ->leftjoin('order_information as oi', 'orders.orderInfo_id', '=', 'oi.id')
             ->leftjoin('order_results as or', 'orders.id', '=', 'or.Order_id');

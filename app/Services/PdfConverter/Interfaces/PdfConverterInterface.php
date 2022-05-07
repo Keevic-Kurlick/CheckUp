@@ -11,7 +11,7 @@ interface PdfConverterInterface
     public function setPdfConverterDTO(BasePdfConverterDTOInterface $pdfConverterDTO): static;
 
     /**
-     * @return void
+     * @return string
      */
-    public function run(): void;
+    public function run(): string;
 }

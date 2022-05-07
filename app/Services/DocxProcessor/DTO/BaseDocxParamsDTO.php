@@ -4,6 +4,7 @@ namespace App\Services\DocxProcessor\DTO;
 
 use App\Services\DocxProcessor\Exceptions\DTO\CallingTemplateParamsMethodAtBaseDTOClassException;
 use App\Services\DocxProcessor\Exceptions\DTO\EmptyResultNameException;
+use App\Services\DocxProcessor\Exceptions\DTO\EmptyResultPathException;
 use App\Services\DocxProcessor\Exceptions\DTO\EmptyTemplateNameException;
 use App\Services\DocxProcessor\Interfaces\DTO\BaseDocxParamsInterface;
 use App\Services\DocxProcessor\Interfaces\ValueObjects\ValueObjectInterface;
@@ -12,28 +13,42 @@ use ReflectionProperty;
 abstract class BaseDocxParamsDTO implements BaseDocxParamsInterface
 {
     /** @var string */
-    private string $templateName;
+    private string $templatePath;
+
+    /** @var string */
+    private string $resultPath;
 
     /** @var string */
     private string $resultName;
 
     /**
-     * @param string $templateName
-     * @param string $resultName
+     * @param string $templatePath
+     * @param string $resultPath
      * @return static
      */
-    public static function make(string $templateName, string $resultName): static {
-        return new static($templateName, $resultName);
+    public static function make(string $templatePath, string $resultPath): static {
+        return new static($templatePath, $resultPath);
     }
 
     /**
-     * @param string $templateName
-     * @param string $resultName
+     * @param string $templatePath
+     * @param string $resultPath
      */
-    public function __construct(string $templateName, string $resultName)
+    private function __construct(string $templatePath, string $resultPath)
     {
-        $this->templateName = $templateName;
+        $this->templatePath = $templatePath;
+        $this->resultPath = $resultPath;
+    }
+
+    /**
+     * @param string $resultName
+     * @return $this
+     */
+    public function setResultName(string $resultName): static
+    {
         $this->resultName = $resultName;
+
+        return $this;
     }
 
     /**
@@ -42,44 +57,29 @@ abstract class BaseDocxParamsDTO implements BaseDocxParamsInterface
      */
     public function getPathToTemplate(): string
     {
-        if (empty($this->templateName)) {
+        if (empty($this->templatePath)) {
             throw new EmptyTemplateNameException('`templateName` property not entered.');
         }
 
-        return static::getBasePathToTemplate() . 'templates/' . $this->templateName . '.docx';
+        return $this->templatePath;
     }
 
     /**
      * @return string
+     * @throws EmptyResultPathException
      * @throws EmptyResultNameException
      */
     public function getPathToSaveResult(): string
     {
-        if (empty($this->templateName)) {
+        if (empty($this->resultPath)) {
+            throw new EmptyResultPathException('`resultPath` property not entered.');
+        }
+
+        if (empty($this->resultName)) {
             throw new EmptyResultNameException('`resultName` property not entered.');
         }
 
-        return static::getBasePathToTemplate() . 'results/' . $this->resultName . '.docx';
-    }
-
-    /**
-     * @param string $resultName
-     * @return BaseDocxParamsDTO
-     */
-    public function setResultName(string $resultName): static
-    {
-        $this->resultName = $resultName;
-        return $this;
-    }
-
-    /**
-     * @param string $templateName
-     * @return BaseDocxParamsDTO
-     */
-    public function setTemplateName(string $templateName): static
-    {
-        $this->templateName = $templateName;
-        return $this;
+        return $this->resultPath . $this->resultName . '.docx';
     }
 
     /**
@@ -105,7 +105,7 @@ abstract class BaseDocxParamsDTO implements BaseDocxParamsInterface
 
                 if (!empty($methodResult)) {
                     $valuesForTemplate = array_merge($valuesForTemplate, [
-                        $methodResult::getTemplateKey() => $methodResult::getValue()
+                        $methodResult::getTemplateKey() => $methodResult->getValue()
                     ]);
                 }
             }
@@ -132,7 +132,7 @@ abstract class BaseDocxParamsDTO implements BaseDocxParamsInterface
     /**
      * @return array
      */
-    private static function mapTemplateParams()
+    private static function mapTemplateParams(): array
     {
         $mappedTemplateParams = [];
 

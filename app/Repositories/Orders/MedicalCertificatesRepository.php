@@ -3,9 +3,9 @@
 namespace App\Repositories\Orders;
 
 use App\Repositories\BaseRepository;
-use App\Models\OrderResult as Model;
+use App\Models\MedicalCertificate as Model;
 
-class OrderResultsRepository extends BaseRepository
+class MedicalCertificatesRepository extends BaseRepository
 {
 
     /**

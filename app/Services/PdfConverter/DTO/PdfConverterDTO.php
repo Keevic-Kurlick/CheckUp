@@ -33,10 +33,20 @@ class PdfConverterDTO implements BasePdfConverterDTOInterface
     private string $pathToFile;
 
     /** @var string */
-    private string $fileExtension;
+    private string $fileExtension = self::FILE_EXTENSION_WORD2007;
 
     /** @var string */
     private string $pathToResult;
+
+    /**
+     * @return PdfConverterDTO
+     */
+    public static function make(): PdfConverterDTO
+    {
+        return new self();
+    }
+
+    private function __construct() {}
 
     /**
      * @param string $file

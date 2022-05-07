@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\DB;
  * @property string $status
  * @property int    $patient_id
  * @property int    $service_id
+ * @property int    $orderResult_id
  * @method static whereId(int $orderId)
  * @method static wherePatientId(int $patientId)
  */
@@ -106,7 +107,7 @@ class Order extends Model
      */
     public function service(): \Illuminate\Database\Eloquent\Relations\HasOne
     {
-        return $this->hasOne(Service::class);
+        return $this->hasOne(Service::class, 'id', 'service_id');
     }
 
     /**
