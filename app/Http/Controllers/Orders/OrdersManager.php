@@ -282,24 +282,6 @@ class OrdersManager
     }
 
     /**
-     * @param int $orderId
-     * @return OrderResult
-     * @throws \Throwable
-     */
-    private function makeOrderResultByOrderId(int $orderId): OrderResult
-    {
-        DB::beginTransaction();
-
-        $orderResults = new OrderResult();
-        $orderResults->Order_id = $orderId;
-        $orderResults->save();
-
-        DB::commit();
-
-        return $orderResults;
-    }
-
-    /**
      * @param Order $order
      * @param string $nextStatus
      * @param User $doctor
