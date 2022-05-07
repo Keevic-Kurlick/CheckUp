@@ -79,7 +79,24 @@ class OrdersManager
 
                 break;
             }
+            case Order::COMPLETE_STATUS: {
+                $this->completeStatusHandler($order);
+
+                break;
+            }
         }
+    }
+
+    private function completeStatusHandler(Order $order)
+    {
+        DB::beginTransaction();
+
+        Order::whereId($order->id)
+            ->update([
+                'status' => Order::COMPLETE_STATUS,
+            ]);
+
+        DB::commit();
     }
 
     /**
