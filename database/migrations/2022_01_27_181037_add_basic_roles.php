@@ -23,6 +23,7 @@ class AddBasicRoles extends Migration
         foreach ($this->roles as $roleName => $roleRight) {
             $role = new Role();
             $role->name = $roleName;
+            $role->rights = $roleRight;
             $role->save();
         }
     }
