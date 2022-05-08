@@ -60,7 +60,7 @@ class Order extends Model
     public const MAP_STEPS_NAMES_ACTION = [
         self::IN_PROGRESS_STATUS            => 'Взять в работу',
         self::COMPLETE_STATUS               => 'Завершить',
-        self::CANCEL_STATUS                 => 'Отказать',
+        self::CANCEL_STATUS                 => 'Отклонить',
         self::ADDITIONAL_STEP_MAKE_MEDICAL_CERTIFICATE => 'Сгенерировать справку'
     ];
 

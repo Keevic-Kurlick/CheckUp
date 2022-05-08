@@ -21,7 +21,7 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::group(['prefix' => 'menu'], function () {
+Route::middleware('patientOrNotAuth')->prefix('menu')->group(function () {
 
     Route::get('/services', [\App\Http\Controllers\Menu\Services\ServicesController::class, 'servicesList'])
         ->name('menu.services.list');
@@ -29,11 +29,11 @@ Route::group(['prefix' => 'menu'], function () {
     Route::get('/services/{id}', [\App\Http\Controllers\Menu\Services\ServicesController::class, 'show'])
         ->name('menu.services.show');
 
-    Route::middleware( 'auth')->post('/services/{id}/order/create', [App\Http\Controllers\Menu\OrderServices\OrderServicesController::class, 'store'])
+    Route::middleware( 'patient')->post('/services/{id}/order/create', [App\Http\Controllers\Menu\OrderServices\OrderServicesController::class, 'store'])
         ->name('menu.services.order.create');
 });
 
-Route::group(['prefix' => 'profile', 'middleware' => 'auth'], function () {
+Route::middleware(['auth', 'patient'])->prefix('profile')->group(function () {
 
     Route::get('/orders', [App\Http\Controllers\Profile\OrdersController::class, 'ordersList'])
         ->name('profile.orders.list');
