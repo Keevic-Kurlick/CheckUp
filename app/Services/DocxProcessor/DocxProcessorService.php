@@ -18,14 +18,14 @@ class DocxProcessorService implements DocxProcessorInterface
      */
     public function setDocxProcessorDTO(BaseDocxParamsDTO $docxProcessorDTO): static
     {
-        $this->setDocxProcessorDTO($docxProcessorDTO);
+        $this->docxProcessorDTO = $docxProcessorDTO;
 
         return $this;
     }
 
     /**
      * @return string
-     * @throws Exceptions\DTO\EmptyResultNameException
+     * @throws Exceptions\DTO\EmptyResultPathException
      * @throws Exceptions\DTO\EmptyTemplateNameException
      * @throws DocxProcessorException
      */
@@ -35,8 +35,8 @@ class DocxProcessorService implements DocxProcessorInterface
         $pathToResult   = $this->docxProcessorDTO->getPathToSaveResult();
         $templateValues = $this->docxProcessorDTO->getValuesForTemplate();
 
-        $absolutePathToTemplate = storage_path($pathToTemplate);
-        $absolutePathToResult   = storage_path($pathToResult);
+        $absolutePathToTemplate = \Storage::path($pathToTemplate);
+        $absolutePathToResult   = \Storage::path($pathToResult);
 
         try {
             $templateProcessor = new TemplateProcessor($absolutePathToTemplate);

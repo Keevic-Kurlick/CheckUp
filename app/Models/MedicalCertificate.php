@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Str;
 
 /**
  * @property int id
@@ -15,7 +17,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class MedicalCertificate extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
     /** @var string[] $fillable */
     protected $fillable  = [
@@ -23,4 +25,14 @@ class MedicalCertificate extends Model
         'description',
         'template_path',
     ];
+
+    /**
+     * @return string
+     */
+    public function getTransformedName(): string
+    {
+        $transformedName = Str::slug($this->name);
+
+        return $transformedName;
+    }
 }

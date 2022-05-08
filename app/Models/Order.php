@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\DB;
 
 /**s
@@ -11,11 +12,13 @@ use Illuminate\Support\Facades\DB;
  * @property string $status
  * @property int    $patient_id
  * @property int    $service_id
+ * @property int    $orderResult_id
+ * @method static whereId(int $orderId)
  * @method static wherePatientId(int $patientId)
  */
 class Order extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
     /** @var string  */
     public const AWAIT_STATUS        = 'await';
@@ -37,6 +40,14 @@ class Order extends Model
         self::CANCEL_STATUS,
     ];
 
+    /** @var string */
+    public const ADDITIONAL_STEP_MAKE_MEDICAL_CERTIFICATE = 'make_analysis';
+
+    /** @var string[] */
+    public const ADDITIONAL_STEPS = [
+        self::ADDITIONAL_STEP_MAKE_MEDICAL_CERTIFICATE,
+    ];
+
     /** @var array|string[]  */
     public const STATUS_MAP = [
         self::AWAIT_STATUS => 'В ожидании',
@@ -45,15 +56,38 @@ class Order extends Model
         self::CANCEL_STATUS => 'Отклонено',
     ];
 
-    protected $fillable = [
-        'status',
+    /** @var string[] */
+    public const MAP_STEPS_NAMES_ACTION = [
+        self::IN_PROGRESS_STATUS            => 'Взять в работу',
+        self::COMPLETE_STATUS               => 'Завершить',
+        self::CANCEL_STATUS                 => 'Отклонить',
+        self::ADDITIONAL_STEP_MAKE_MEDICAL_CERTIFICATE => 'Сгенерировать справку'
+    ];
+
+    /** @var string[] */
+    public const MAP_STEPS_BUTTON_COLOR = [
+        self::IN_PROGRESS_STATUS                => 'info',
+        self::COMPLETE_STATUS                   => 'success',
+        self::CANCEL_STATUS                     => 'warning',
+        self::ADDITIONAL_STEP_MAKE_MEDICAL_CERTIFICATE     => 'info',
     ];
 
     /**
+     * @var string[]
+     */
+    protected $fillable = [
+        'status',
+        'doctor_id',
+        'orderInfo_id',
+    ];
+
+    /**
+     * @param $patient
      * @param $service
      * @return Order
+     * @throws \Throwable
      */
-    public static function create($patient, $service)
+    public static function create($patient, $service): Order
     {
         DB::beginTransaction();
 
@@ -73,15 +107,7 @@ class Order extends Model
      */
     public function service(): \Illuminate\Database\Eloquent\Relations\HasOne
     {
-        return $this->hasOne(Service::class);
-    }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
-     */
-    public function patient(): \Illuminate\Database\Eloquent\Relations\HasOne
-    {
-        return $this->hasOne(User::class);
+        return $this->hasOne(Service::class, 'id', 'service_id');
     }
 
     /**
@@ -89,7 +115,15 @@ class Order extends Model
      */
     public function doctor(): \Illuminate\Database\Eloquent\Relations\HasOne
     {
-        return $this->hasOne(User::class);
+        return $this->hasOne(User::class, 'id', 'doctor_id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function patient(): \Illuminate\Database\Eloquent\Relations\HasOne
+    {
+        return $this->hasOne(User::class, 'id', 'patient_id');
     }
 
     /**
@@ -97,6 +131,14 @@ class Order extends Model
      */
     public function orderInfo(): \Illuminate\Database\Eloquent\Relations\HasOne
     {
-        return $this->hasOne(OrderInformation::class);
+        return $this->hasOne(OrderInformation::class, 'id', 'orderInfo_id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function orderResult(): \Illuminate\Database\Eloquent\Relations\HasOne
+    {
+        return $this->hasOne(OrderResult::class, 'Order_id', 'id');
     }
 }

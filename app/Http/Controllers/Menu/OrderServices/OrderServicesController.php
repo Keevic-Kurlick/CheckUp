@@ -31,6 +31,14 @@ class OrderServicesController extends Controller
             $notifyMessageStatus = 'error';
 
             $response = redirect()->back();
+
+            \Log::info('App.Http.Controllers.Menu.OrderServices.OrderServicesController.store', [
+                'message' => 'Make order error.',
+                'data' => [
+                    'service_id' => $serviceId,
+                    'exception_message' => $e->getMessage(),
+                ]
+            ]);
         }
 
         $notifyMessage = __("pages.order_services.store.{$notifyMessageStatus}");

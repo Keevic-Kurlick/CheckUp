@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\Profile\OrdersController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,7 +21,7 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::group(['prefix' => 'menu'], function () {
+Route::middleware('patientOrNotAuth')->prefix('menu')->group(function () {
 
     Route::get('/services', [\App\Http\Controllers\Menu\Services\ServicesController::class, 'servicesList'])
         ->name('menu.services.list');
@@ -30,13 +29,13 @@ Route::group(['prefix' => 'menu'], function () {
     Route::get('/services/{id}', [\App\Http\Controllers\Menu\Services\ServicesController::class, 'show'])
         ->name('menu.services.show');
 
-    Route::middleware( 'auth')->post('/services/{id}/order/create', [App\Http\Controllers\Menu\OrderServices\OrderServicesController::class, 'store'])
+    Route::middleware( 'patient')->post('/services/{id}/order/create', [App\Http\Controllers\Menu\OrderServices\OrderServicesController::class, 'store'])
         ->name('menu.services.order.create');
 });
 
-Route::group(['prefix' => 'profile', 'middleware' => 'auth'], function () {
+Route::middleware(['auth', 'patient'])->prefix('profile')->group(function () {
 
-    Route::get('/orders', [OrdersController::class, 'ordersList'])
+    Route::get('/orders', [App\Http\Controllers\Profile\OrdersController::class, 'ordersList'])
         ->name('profile.orders.list');
 
     Route::get('settings', [\App\Http\Controllers\Profile\SettingsController::class, 'settings'])
@@ -47,6 +46,34 @@ Route::group(['prefix' => 'profile', 'middleware' => 'auth'], function () {
 
     Route::post('documents/store', [\App\Http\Controllers\Profile\DocumentsController::class, 'store'])
         ->name('profile.documents.store');
+});
+
+Route::middleware('doctor')->group(function () {
+    Route::get('orders', [\App\Http\Controllers\Orders\OrdersController::class, 'index'])
+        ->name('orders.index');
+
+    Route::get('orders/{orderId}', [\App\Http\Controllers\Orders\OrdersController::class, 'show'])
+        ->name('orders.show');
+
+    Route::post('orders/{orderId}/next-step', [\App\Http\Controllers\Orders\OrdersController::class, 'nextStep'])
+        ->name('orders.next-step');
+
+    Route::post('orders/{orderId}/cancel', [\App\Http\Controllers\Orders\OrdersController::class, 'cancel'])
+        ->name('orders.cancel');
+
+    Route::post('orders/{orderId}/complete', [\App\Http\Controllers\Orders\OrdersController::class, 'complete'])
+        ->name('orders.complete');
+
+    Route::get(
+        'orders/{orderId}/downloadPassportScan',
+        [\App\Http\Controllers\Orders\OrdersController::class, 'downloadPassportScan']
+    )->name('orders.downloadPassportScan');
+
+    Route::get(
+        'orders/{orderId}/downloadAnalysisScan',
+        [\App\Http\Controllers\Orders\OrdersController::class, 'downloadAnalysisScan']
+    )->name('orders.downloadAnalysisScan');
+
 });
 
 Route::name('admin.')->prefix('admin')->middleware('admin')->group(function() {

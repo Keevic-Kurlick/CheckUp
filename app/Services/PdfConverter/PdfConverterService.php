@@ -4,6 +4,7 @@ namespace App\Services\PdfConverter;
 
 use App\Services\PdfConverter\Interfaces\BasePdfConverterDTOInterface;
 use App\Services\PdfConverter\Interfaces\PdfConverterInterface;
+use Illuminate\Support\Facades\Storage;
 use PhpOffice\PhpWord\IOFactory;
 use PhpOffice\PhpWord\Settings;
 
@@ -39,13 +40,13 @@ class PdfConverterService implements PdfConverterInterface
     }
 
     /**
-     * @return void
+     * @return string
      * @throws \PhpOffice\PhpWord\Exception\Exception
      */
-    public function run(): void
+    public function run(): string
     {
-        $pathToFile     = storage_path($this->pdfConverterDTO->getPathToFile());
-        $pathToResult   = storage_path($this->pdfConverterDTO->getPathToResult());
+        $pathToFile     = Storage::path($this->pdfConverterDTO->getPathToFile());
+        $pathToResult   = Storage::path($this->pdfConverterDTO->getPathToResult());
 
         Settings::setPdfRenderer($this->rendererName, $this->rendererLibraryPath);
 
@@ -58,5 +59,7 @@ class PdfConverterService implements PdfConverterInterface
 
         $pdfWriter = IOFactory::createWriter($phpWord, 'PDF');
         $pdfWriter->save($pathToResult);
+
+        return $pathToResult;
     }
 }

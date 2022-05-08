@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * @property int $id
@@ -18,7 +19,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Service extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
     /**
      * @var string[]
@@ -39,8 +40,8 @@ class Service extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
-    public function certificate(): \Illuminate\Database\Eloquent\Relations\HasOne
+    public function medicalCertificate(): \Illuminate\Database\Eloquent\Relations\HasOne
     {
-        return $this->hasOne(MedicalCertificate::class);
+        return $this->hasOne(MedicalCertificate::class, 'id', 'medical_certificate');
     }
 }

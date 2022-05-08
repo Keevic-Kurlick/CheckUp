@@ -58,8 +58,14 @@
                                     @can('hasAccessToAdminPanel', \App\Models\User::class)
                                         <li><a class="dropdown-item" href="{{ route('admin.index') }}">Админ панель</a></li>
                                     @endcan
-                                    <li><a class="dropdown-item" href="{{ route('profile.orders.list') }}">Заказы</a></li>
-                                    <li><a class="dropdown-item" href="{{ route('profile.documents') }}">Документы</a></li>
+
+                                    @can('canOrder', \App\Models\User::class)
+                                        <li><a class="dropdown-item" href="{{ route('profile.orders.list') }}">Заказы</a></li>
+                                        <li><a class="dropdown-item" href="{{ route('profile.documents') }}">Документы</a></li>
+                                    @endcan
+                                    @can('hasAccessToDoctorOrders', \App\Models\User::class)
+                                            <li><a class="dropdown-item" href="{{ route('orders.index') }}">Заказы</a></li>
+                                    @endcan
                                     <li><a class="dropdown-item" href="{{ route('profile.settings') }}">Настройки</a></li>
                                     <li><hr class="dropdown-divider"></li>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
