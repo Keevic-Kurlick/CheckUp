@@ -72,6 +72,17 @@ class Order extends Model
         self::ADDITIONAL_STEP_MAKE_MEDICAL_CERTIFICATE     => 'info',
     ];
 
+    /** @var \string[][] */
+    public const SEQUENCE_STEPS = [
+        Order::AWAIT_STATUS => [
+            Order::IN_PROGRESS_STATUS,
+        ],
+        Order::IN_PROGRESS_STATUS => [
+            Order::COMPLETE_STATUS,
+            Order::CANCEL_STATUS,
+        ],
+    ];
+
     /**
      * @var string[]
      */
