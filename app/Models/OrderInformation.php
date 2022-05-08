@@ -16,16 +16,20 @@ use Illuminate\Support\Carbon;
  * @property Carbon $updated_at
  * @property string $passport_path
  * @property string $analysis_path
+ * @property int    $order_id
  */
 class OrderInformation extends Model
 {
     use HasFactory, SoftDeletes;
+
+    /** @var string */
+    protected $table = 'order_information';
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function order(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        return $this->belongsTo(Order::class);
+        return $this->belongsTo(Order::class, 'orderInfo_id', 'order_id');
     }
 }

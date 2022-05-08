@@ -4,9 +4,12 @@ namespace App\Http\Controllers\Orders;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Orders\CancelOrderRequest;
+use App\Http\Requests\Orders\DownloadAnalysysScanRequest;
+use App\Http\Requests\Orders\DownloadPassportScanRequest;
 use App\Http\Requests\Orders\NextStepOrderRequest;
 use App\Repositories\Orders\OrdersRepository;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class OrdersController extends Controller
 {
@@ -51,12 +54,13 @@ class OrdersController extends Controller
             $errorMessage = __('pages.orders.show.error');
             toastr()->error($errorMessage);
 
-            return $request->route('orders.index');
+            return redirect()->route('orders.index');
         }
 
         $nextSteps = $this->ordersManager->getNextSteps($order);
+        $currentUser = \Auth::user();
 
-        return view('layouts.orders.common.show', compact('order', 'nextSteps'));
+        return view('layouts.orders.common.show', compact('order', 'nextSteps', 'currentUser'));
     }
 
     /**
@@ -84,7 +88,7 @@ class OrdersController extends Controller
             $errorMessage = __('pages.orders.show.error');
             toastr()->error($errorMessage);
 
-            return $request->route('orders.index');
+            return redirect()->route('orders.index');
         }
 
         try {
@@ -143,5 +147,33 @@ class OrdersController extends Controller
         toastr()->$notifyMessageStatus($notifyMessage);
 
         return redirect()->back();
+    }
+
+    /**
+     * @param DownloadPassportScanRequest $request
+     * @param int $orderId
+     * @return \Symfony\Component\HttpFoundation\BinaryFileResponse
+     */
+    public function downloadPassportScan(DownloadPassportScanRequest $request, int $orderId): \Symfony\Component\HttpFoundation\BinaryFileResponse
+    {
+        $passportPath = $this->ordersRepository->getPassportPathToDownload($orderId);
+
+        $fullPathToPassportScan = Storage::disk('public')->path($passportPath);
+
+        return response()->download($fullPathToPassportScan, 'passport_scan');
+    }
+
+    /**
+     * @param DownloadAnalysysScanRequest $request
+     * @param int $orderId
+     * @return \Symfony\Component\HttpFoundation\BinaryFileResponse
+     */
+    public function downloadAnalysisScan(DownloadAnalysysScanRequest $request, int $orderId): \Symfony\Component\HttpFoundation\BinaryFileResponse
+    {
+        $analysisScan = $this->ordersRepository->getAnalysisPathToDownload($orderId);
+
+        $fullPathToAnalysisScan = Storage::disk('public')->path($analysisScan);
+
+        return response()->download($fullPathToAnalysisScan, 'analysis_scan');
     }
 }

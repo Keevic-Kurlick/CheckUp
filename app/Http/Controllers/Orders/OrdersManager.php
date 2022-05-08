@@ -8,7 +8,6 @@ use App\Models\MedicalCertificate;
 use App\Models\Order;
 use App\Models\OrderResult;
 use App\Models\User;
-use App\Repositories\Orders\OrderResultsRepository;
 use App\Repositories\Orders\OrdersRepository;
 use App\Services\DocxProcessor\DTO\MedicalCertificateDocxParamsDTO;
 use App\Services\DocxProcessor\Interfaces\DocxProcessorInterface;
@@ -21,12 +20,10 @@ use Illuminate\Support\Str;
 class OrdersManager
 {
     /**
-     * @param OrderResultsRepository $orderResultsRepository
      * @param OrdersRepository $ordersRepository
      * @param DocxProcessorInterface $docxProcessorService
      */
     public function __construct(
-        private OrderResultsRepository $orderResultsRepository,
         private OrdersRepository       $ordersRepository,
         private DocxProcessorInterface $docxProcessorService
     ) {}
@@ -44,7 +41,10 @@ class OrdersManager
             $nextSteps = OrderService::STEPS[$order->status];
         }
 
-        if (in_array(Order::COMPLETE_STATUS, $nextSteps) && empty($order->certificate_path)) {
+        if (
+            in_array(Order::COMPLETE_STATUS, $nextSteps)
+            && empty($order?->orderResult?->certificate_path)
+        ) {
 
             $nextSteps = array_filter($nextSteps, function ($step) {
                 return $step !== Order::COMPLETE_STATUS;

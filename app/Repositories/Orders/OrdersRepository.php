@@ -30,14 +30,51 @@ class OrdersRepository extends BaseRepository
     public function getOrderByIdToShow(int $orderId): Model
     {
         /** @var Order $order */
-        $order = $this->getOrderQuery()
-            ->addSelect([
-                'users.name as doctor_name',
+        $order = $this->startCondition()
+            ->with([
+                'patient',
+                'doctor',
+                'service',
+                'orderInfo',
             ])
-            ->leftjoin('users', 'orders.doctor_id', '=', 'users.id')
             ->findOrFail($orderId);
 
         return $order;
+    }
+
+    /**
+     * @param int $orderId
+     * @return string
+     */
+    public function getPassportPathToDownload(int $orderId): string
+    {
+        /** @var Model $order */
+        $passportPath = $this->startCondition()
+            ->with([
+                'orderInfo'
+            ])
+            ->findOrFail($orderId)
+            ->orderInfo
+            ?->passport_path;
+
+        return $passportPath;
+    }
+
+    /**
+     * @param int $orderId
+     * @return string
+     */
+    public function getAnalysisPathToDownload(int $orderId): string
+    {
+        $analysisPath = $this->startCondition()
+            ->with([
+                'orderInfo'
+            ])
+            ->findOrFail($orderId)
+            ->orderInfo
+            ?->analysis_path;
+
+        return $analysisPath;
     }
 
     /**

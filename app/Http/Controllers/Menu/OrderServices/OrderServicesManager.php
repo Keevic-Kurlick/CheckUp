@@ -71,13 +71,17 @@ class OrderServicesManager
             $this->storePassportScan($patientPassportScan, $pathToSaveScans);
             $this->storeAnalysisScan($patientAnalysisScan, $pathToSaveScans);
 
+            $publicDirPassportScan    = $this->copyScanToPublic($pathToSaveScans, $fullPathToPassport);
+            $publicDirAnalysisScan     = $this->copyScanToPublic($pathToSaveScans, $fullPathToAnalysis);
+
             $orderInformation = new OrderInformation();
             $orderInformation->passport_series = $passportSeries;
             $orderInformation->passport_number = $passportNumber;
             $orderInformation->inn = $patientInn;
             $orderInformation->snils = $patientSnils;
-            $orderInformation->passport_path = $fullPathToPassport;
-            $orderInformation->analysis_path = $fullPathToAnalysis;
+            $orderInformation->passport_path = $publicDirPassportScan;
+            $orderInformation->analysis_path = $publicDirAnalysisScan;
+            $orderInformation->order_id = $order->id;
             $orderInformation->save();
 
             $order->update([
@@ -251,5 +255,19 @@ class OrderServicesManager
     private function getPathToOrderStorage(int $orderId): string
     {
         return "orders/$orderId";
+    }
+
+    /**
+     * @param string $pathToSaveScans
+     * @param string $pathToFile
+     * @return bool|string
+     */
+    private function copyScanToPublic(string $pathToSaveScans, string $pathToFile): bool|string
+    {
+        $fullPathToFile = Storage::path($pathToFile);
+
+        $isCopied = Storage::disk('public')->putFile($pathToSaveScans, $fullPathToFile);
+
+        return $isCopied;
     }
 }

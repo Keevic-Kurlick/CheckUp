@@ -60,6 +60,17 @@ Route::middleware('doctor')->group(function () {
 
     Route::post('orders/{orderId}/cancel', [\App\Http\Controllers\Orders\OrdersController::class, 'cancel'])
         ->name('orders.cancel');
+
+    Route::get(
+        'orders/{orderId}/downloadPassportScan',
+        [\App\Http\Controllers\Orders\OrdersController::class, 'downloadPassportScan']
+    )->name('orders.downloadPassportScan');
+
+    Route::get(
+        'orders/{orderId}/downloadAnalysisScan',
+        [\App\Http\Controllers\Orders\OrdersController::class, 'downloadAnalysisScan']
+    )->name('orders.downloadAnalysisScan');
+
 });
 
 Route::name('admin.')->prefix('admin')->middleware('admin')->group(function() {

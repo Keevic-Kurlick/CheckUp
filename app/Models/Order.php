@@ -61,7 +61,7 @@ class Order extends Model
         self::IN_PROGRESS_STATUS            => 'Взять в работу',
         self::COMPLETE_STATUS               => 'Завершить',
         self::CANCEL_STATUS                 => 'Отказать',
-        self::ADDITIONAL_STEP_MAKE_MEDICAL_CERTIFICATE => 'Сформировать справку'
+        self::ADDITIONAL_STEP_MAKE_MEDICAL_CERTIFICATE => 'Сгенерировать справку'
     ];
 
     /** @var string[] */
@@ -113,17 +113,17 @@ class Order extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
-    public function patient(): \Illuminate\Database\Eloquent\Relations\HasOne
+    public function doctor(): \Illuminate\Database\Eloquent\Relations\HasOne
     {
-        return $this->hasOne(User::class);
+        return $this->hasOne(User::class, 'id', 'doctor_id');
     }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
-    public function doctor(): \Illuminate\Database\Eloquent\Relations\HasOne
+    public function patient(): \Illuminate\Database\Eloquent\Relations\HasOne
     {
-        return $this->hasOne(User::class);
+        return $this->hasOne(User::class, 'id', 'patient_id');
     }
 
     /**
@@ -131,6 +131,14 @@ class Order extends Model
      */
     public function orderInfo(): \Illuminate\Database\Eloquent\Relations\HasOne
     {
-        return $this->hasOne(OrderInformation::class);
+        return $this->hasOne(OrderInformation::class, 'id', 'orderInfo_id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function orderResult(): \Illuminate\Database\Eloquent\Relations\HasOne
+    {
+        return $this->hasOne(OrderResult::class, 'Order_id', 'id');
     }
 }

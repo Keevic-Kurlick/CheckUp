@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Str;
 
 /**
  * @property int id
@@ -24,4 +25,14 @@ class MedicalCertificate extends Model
         'description',
         'template_path',
     ];
+
+    /**
+     * @return string
+     */
+    public function getTransformedName(): string
+    {
+        $transformedName = Str::slug($this->name);
+
+        return $transformedName;
+    }
 }

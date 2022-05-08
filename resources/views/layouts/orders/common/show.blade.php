@@ -2,6 +2,7 @@
     /**
      * @var \App\Models\Order $order
      * @var array $nextSteps
+     * @var \App\Models\User $currentUser
      */
 @endphp
 
@@ -18,15 +19,19 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <div class="col-12 col-sm-2 col-lg-1 button-back-block mt-2">
+            <div class="col-12 button-back-block mt-2">
                 <a href="{{ route('orders.index') }}"
                    class="btn btn-outline-success">
                     Назад
                 </a>
             </div>
-            <div class="col-12 col-lg-5 mt-2">
-                <div class="card card-title">
-                    <div class="card-header d-flex justify-content-between">
+            <div class="col-12
+                @if(!empty($nextSteps))
+                    col-lg-6
+                @endif
+                    mt-2">
+                <div class="card">
+                    <div class="card-header card-title d-flex justify-content-between">
                         <div class="col-3">
                             №{{ $order->id }}
                         </div>
@@ -35,13 +40,50 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <p> Услуга: {{ $order->service_name }}</p>
-                        <p> Доктор: {{ $order->doctor_name ?? 'Не назначен' }}</p>
+                        <p> Услуга: {{ $order->service->name }}</p>
+                        <p> Доктор: {{ $order->doctor?->name ?? 'Не назначен' }}</p>
                     </div>
                 </div>
             </div>
 
-            @if(!empty($nextSteps))
+            @if(!empty($nextSteps) && $currentUser->id === $order->doctor?->id)
+                <div class="col-12 col-lg-6 mt-2" id="patient_information">
+                    <div class="card">
+                        <div class="card-header card-title">
+                            Информация о пациенте
+                        </div>
+                        <div class="card-body">
+                            <div class="patient_info">
+                                <ul>
+                                    <li>ФИО: {{ $order->patient->name }}</li>
+                                    <li>
+                                        Паспорт: Серия: {{ $order->orderInfo->passport_series }} Номер: {{ $order->orderInfo->passport_number }}
+                                    </li>
+                                    <li>ИНН: {{ $order->orderInfo->inn }}</li>
+                                    <li>СНИЛС: {{ $order->orderInfo->snils }}</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <div class="patient_files">
+                                <a class="btn btn-info" href="{{ route('orders.downloadPassportScan', $order->id) }}">
+                                    Скачать скан паспорта
+                                </a>
+
+                                <a class="btn btn-info" href="{{ route('orders.downloadAnalysisScan', $order->id) }}">
+                                    Скачать скан анализов
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endif
+
+            @if(
+                    !empty($nextSteps)
+                    && (in_array(\App\Models\Order::IN_PROGRESS_STATUS, $nextSteps)
+                    ||  $currentUser->id == $order->doctor?->id)
+                )
                 <div class="col-12 col-lg-6 mt-2 actions-block">
                     <div class="card">
                         <div class="card-header">
