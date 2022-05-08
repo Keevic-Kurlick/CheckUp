@@ -34,7 +34,7 @@ class AddBasicRoles extends Migration
      */
     public function down()
     {
-        Role::whereIn('name', [$this->roles])
+        Role::whereIn('name', $this->roles)
             ->delete();
     }
 }
