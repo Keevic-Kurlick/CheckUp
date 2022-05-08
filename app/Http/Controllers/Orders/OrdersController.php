@@ -4,9 +4,11 @@ namespace App\Http\Controllers\Orders;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Orders\CancelOrderRequest;
+use App\Http\Requests\Orders\CompleteOrderRequest;
 use App\Http\Requests\Orders\DownloadAnalysysScanRequest;
 use App\Http\Requests\Orders\DownloadPassportScanRequest;
 use App\Http\Requests\Orders\NextStepOrderRequest;
+use App\Models\Order;
 use App\Repositories\Orders\OrdersRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -143,7 +145,38 @@ class OrdersController extends Controller
             $notifyMessageStatus = 'error';
         }
 
-        $notifyMessage = __("pages.orders.cancel.$notifyMessageStatus");
+        $notifyMessage = __("pages.orders." . Order::CANCEL_STATUS .".$notifyMessageStatus");
+        toastr()->$notifyMessageStatus($notifyMessage);
+
+        return redirect()->back();
+    }
+
+    /**
+     * @param CompleteOrderRequest $request
+     * @param int $orderId
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Throwable
+     */
+    public function complete(CompleteOrderRequest $request, int $orderId): \Illuminate\Http\RedirectResponse
+    {
+        $notifyMessageStatus = 'success';
+
+        try {
+            $this->ordersManager->completeStatusHandler($request, $orderId);
+        } catch (\Exception $e) {
+
+            \Log::info('App.Http.Controllers.Orders.OrdersController.complete', [
+                'message' => 'Error when switching order to "complete" status.',
+                'data' => [
+                    'order_id' => $orderId,
+                    'exception_message' => $e->getMessage(),
+                ],
+            ]);
+
+            $notifyMessageStatus = 'error';
+        }
+
+        $notifyMessage = __("pages.orders." . Order::COMPLETE_STATUS .".$notifyMessageStatus");
         toastr()->$notifyMessageStatus($notifyMessage);
 
         return redirect()->back();

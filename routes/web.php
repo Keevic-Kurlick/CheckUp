@@ -61,6 +61,9 @@ Route::middleware('doctor')->group(function () {
     Route::post('orders/{orderId}/cancel', [\App\Http\Controllers\Orders\OrdersController::class, 'cancel'])
         ->name('orders.cancel');
 
+    Route::post('orders/{orderId}/complete', [\App\Http\Controllers\Orders\OrdersController::class, 'complete'])
+        ->name('orders.complete');
+
     Route::get(
         'orders/{orderId}/downloadPassportScan',
         [\App\Http\Controllers\Orders\OrdersController::class, 'downloadPassportScan']

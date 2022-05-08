@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Orders;
 
 use App\Http\Requests\Orders\CancelOrderRequest;
+use App\Http\Requests\Orders\CompleteOrderRequest;
 use App\Http\Requests\Orders\NextStepOrderRequest;
 use App\Models\MedicalCertificate;
 use App\Models\Order;
@@ -41,16 +42,22 @@ class OrdersManager
             $nextSteps = OrderService::STEPS[$order->status];
         }
 
-        if (
-            in_array(Order::COMPLETE_STATUS, $nextSteps)
-            && empty($order?->orderResult?->certificate_path)
-        ) {
+        if (in_array(Order::COMPLETE_STATUS, $nextSteps)) {
+            $hasCertificatePath = !empty($order?->orderResult?->certificate_path);
 
-            $nextSteps = array_filter($nextSteps, function ($step) {
-                return $step !== Order::COMPLETE_STATUS;
-            });
+            if ($hasCertificatePath) {
+                $nextSteps = array_filter($nextSteps, function ($step) {
+                    return $step !== Order::CANCEL_STATUS;
+                });
+            }
 
-            array_unshift($nextSteps, Order::ADDITIONAL_STEP_MAKE_MEDICAL_CERTIFICATE);
+            if (!$hasCertificatePath) {
+                $nextSteps = array_filter($nextSteps, function ($step) {
+                    return $step !== Order::COMPLETE_STATUS;
+                });
+
+                array_unshift($nextSteps, Order::ADDITIONAL_STEP_MAKE_MEDICAL_CERTIFICATE);
+            }
         }
 
         return $nextSteps;
@@ -79,22 +86,31 @@ class OrdersManager
 
                 break;
             }
-            case Order::COMPLETE_STATUS: {
-                $this->completeStatusHandler($order);
-
-                break;
-            }
         }
     }
 
-    private function completeStatusHandler(Order $order)
+    /**
+     * @param CompleteOrderRequest $request
+     * @param int $orderId
+     * @return void
+     * @throws \Throwable
+     */
+    public function completeStatusHandler(CompleteOrderRequest $request, int $orderId)
     {
         DB::beginTransaction();
 
-        Order::whereId($order->id)
+        Order::whereId($orderId)
             ->update([
                 'status' => Order::COMPLETE_STATUS,
             ]);
+
+        if (!empty($request->approve_message)) {
+            OrderResult::query()
+                ->where('Order_id', $orderId)
+                ->update([
+                    'approve_message' => $request->approve_message,
+                ]);
+        }
 
         DB::commit();
     }
