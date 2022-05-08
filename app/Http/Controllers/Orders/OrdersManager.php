@@ -12,7 +12,6 @@ use App\Models\User;
 use App\Repositories\Orders\OrdersRepository;
 use App\Services\DocxProcessor\DTO\MedicalCertificateDocxParamsDTO;
 use App\Services\DocxProcessor\Interfaces\DocxProcessorInterface;
-use App\Services\Orders\OrderService;
 use App\Services\PdfConverter\DTO\PdfConverterDTO;
 use App\Services\PdfConverter\PdfConverterManager;
 use Illuminate\Support\Facades\DB;
@@ -36,10 +35,10 @@ class OrdersManager
     public function getNextSteps(Order $order): array
     {
         $nextSteps      = [];
-        $isStepsExists  = array_key_exists($order->status, OrderService::STEPS);
+        $isStepsExists  = array_key_exists($order->status, Order::SEQUENCE_STEPS);
 
         if (!empty($isStepsExists)) {
-            $nextSteps = OrderService::STEPS[$order->status];
+            $nextSteps = Order::SEQUENCE_STEPS[$order->status];
         }
 
         if (in_array(Order::COMPLETE_STATUS, $nextSteps)) {
