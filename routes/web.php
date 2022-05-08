@@ -33,18 +33,18 @@ Route::middleware('patientOrNotAuth')->prefix('menu')->group(function () {
         ->name('menu.services.order.create');
 });
 
-Route::middleware(['auth', 'patient'])->prefix('profile')->group(function () {
+Route::middleware(['auth'])->prefix('profile')->group(function () {
 
-    Route::get('/orders', [App\Http\Controllers\Profile\OrdersController::class, 'ordersList'])
+    Route::middleware('patient')->get('/orders', [App\Http\Controllers\Profile\OrdersController::class, 'ordersList'])
         ->name('profile.orders.list');
 
     Route::get('settings', [\App\Http\Controllers\Profile\SettingsController::class, 'settings'])
         ->name('profile.settings');
 
-    Route::get('documents', [\App\Http\Controllers\Profile\DocumentsController::class, 'profileDocuments'])
+    Route::middleware('patient')->get('documents', [\App\Http\Controllers\Profile\DocumentsController::class, 'profileDocuments'])
         ->name('profile.documents');
 
-    Route::post('documents/store', [\App\Http\Controllers\Profile\DocumentsController::class, 'store'])
+    Route::middleware('patient')->post('documents/store', [\App\Http\Controllers\Profile\DocumentsController::class, 'store'])
         ->name('profile.documents.store');
 });
 
