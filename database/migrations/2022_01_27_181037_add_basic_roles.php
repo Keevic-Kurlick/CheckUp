@@ -8,9 +8,9 @@ class AddBasicRoles extends Migration
 
     /** @var array $roles */
     private array $roles = [
-        Role::ROLE_PATIENT,
-        Role::ROLE_DOCTOR,
-        Role::ROLE_ADMIN,
+        Role::ROLE_PATIENT => 'Просмотр услуг и добавление заказов',
+        Role::ROLE_DOCTOR => 'Обработка заказов',
+        Role::ROLE_ADMIN => 'Работа со справками и услугами, назначение ролей',
     ];
 
     /**
@@ -20,7 +20,7 @@ class AddBasicRoles extends Migration
      */
     public function up()
     {
-        foreach ($this->roles as $roleName) {
+        foreach ($this->roles as $roleName => $roleRight) {
             $role = new Role();
             $role->name = $roleName;
             $role->save();
