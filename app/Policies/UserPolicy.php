@@ -69,4 +69,19 @@ class UserPolicy
 
         return $response;
     }
+
+    /**
+     * @param User $user
+     * @return bool
+     */
+    public function hasAccessToDoctorOrders(User $user): bool
+    {
+        $response = false;
+
+        if ($user->role->name === Role::ROLE_DOCTOR) {
+            $response = true;
+        }
+
+        return $response;
+    }
 }
