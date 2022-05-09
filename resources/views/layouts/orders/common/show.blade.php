@@ -158,7 +158,8 @@
                                             <textarea name="cancel_message"
                                                       id="cancel_message"
                                                       class="form-control"
-                                                      cols="30" rows="10">
+                                                      cols="6" rows="10"
+                                                      style="height: 186px">
                                                 {{ old('cancel_message') ?? '' }}
                                             </textarea>
 
