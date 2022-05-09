@@ -64,10 +64,11 @@ class OrdersController extends Controller
     {
         $order = $this->ordersRepository->getOrderToDownload($orderId);
 
-        $certificateRelativePath = $order->orderResult?->certificate_path;
-        $serviceName = Str::slug($order->service->name);
+        $certificatePathRelative = $order->orderResult?->certificate_path;
+        $certificatePathFull = \Storage::disk('public')->path($certificatePathRelative);
 
-        $certificatePathFull = \Storage::disk('public')->path($certificateRelativePath);
+        $certificateExtension = \File::extension($certificatePathFull);
+        $serviceName = Str::slug($order->service->name)  . '.' . $certificateExtension;
 
         return response()->download($certificatePathFull, $serviceName);
     }
