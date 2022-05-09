@@ -104,7 +104,7 @@ class OrdersController extends Controller
                 'message' => 'Order processing error.',
                 'data' => [
                     'order_id'          => $orderId,
-                    'doctor_id'         => $currentDoctor,
+                    'doctor_id'         => $currentDoctor?->id,
                     'step'              => $request->step,
                     'exception_message' => $e->getMessage(),
                 ],

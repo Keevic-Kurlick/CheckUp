@@ -7,12 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\DB;
 
-/**s
+/**
  * @property int    $id
  * @property string $status
  * @property int    $patient_id
  * @property int    $service_id
  * @property int    $orderResult_id
+ * @property-read Orderres
  * @method static whereId(int $orderId)
  * @method static wherePatientId(int $patientId)
  */

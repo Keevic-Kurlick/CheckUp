@@ -15,6 +15,7 @@ use App\Services\DocxProcessor\Interfaces\DocxProcessorInterface;
 use App\Services\PdfConverter\DTO\PdfConverterDTO;
 use App\Services\PdfConverter\PdfConverterManager;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class OrdersManager
@@ -135,9 +136,7 @@ class OrdersManager
 
         $pathToDocxResult   = $this->generateDocxResult($medicalCertificateDTO);
 
-        $pdfConverterDTO    = $this->preparePdfConverterDTO($pathToDocxResult, $resultPdfPath);
-
-        $this->convertDocxResultToPdf($pdfConverterDTO);
+        $fullPathToPublicResult = $this->copyResultToPublic($pathToDocxResult, $pathToResult);
 
         DB::beginTransaction();
 
@@ -145,10 +144,10 @@ class OrdersManager
         $orderResult = OrderResult::query()
             ->where('Order_id', $order->id)
             ->updateOrCreate([
-                'certificate_path' => $resultPdfPath,
+                'certificate_path' => $fullPathToPublicResult,
             ],
             [
-                'certificate_path' => $resultPdfPath,
+                'certificate_path' => $fullPathToPublicResult,
                 'Order_id' => $order->id,
             ]
         );
@@ -159,6 +158,20 @@ class OrdersManager
             ]);
 
         DB::commit();
+    }
+
+    /**
+     * @param string $localPathToFile
+     * @param string $publicDir
+     * @return string
+     */
+    private function copyResultToPublic(string $localPathToFile, string $publicDir): string
+    {
+        $fullPathToLocalFile = Storage::disk('local')->path($localPathToFile);
+
+        $fullPublicPathToFile = Storage::disk('public')->putFile($publicDir, $fullPathToLocalFile);
+
+        return $fullPublicPathToFile;
     }
 
     /**

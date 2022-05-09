@@ -21,7 +21,11 @@
             <tbody>
                 @foreach($orders as $order)
                     <tr>
-                        <td>{{ $order['service_name'] }}</td>
+                        <td>
+                            <a href="{{ route('profile.orders.show', $order['id']) }}">
+                                {{ $order['service_name'] }}
+                            </a>
+                        </td>
                         <td>{{ $order['service_price'] }}</td>
                         <td>{{ $order['created_at'] }}</td>
                         <td>{{ $order['status'] }}</td>
