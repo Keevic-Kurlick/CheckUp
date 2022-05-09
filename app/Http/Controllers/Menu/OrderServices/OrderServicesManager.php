@@ -72,7 +72,7 @@ class OrderServicesManager
             $this->storeAnalysisScan($patientAnalysisScan, $pathToSaveScans);
 
             $publicDirPassportScan    = $this->copyScanToPublic($pathToSaveScans, $fullPathToPassport);
-            $publicDirAnalysisScan     = $this->copyScanToPublic($pathToSaveScans, $fullPathToAnalysis);
+            $publicDirAnalysisScan    = $this->copyScanToPublic($pathToSaveScans, $fullPathToAnalysis);
 
             $orderInformation = new OrderInformation();
             $orderInformation->passport_series = $passportSeries;

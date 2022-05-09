@@ -35,8 +35,15 @@ Route::middleware('patientOrNotAuth')->prefix('menu')->group(function () {
 
 Route::middleware(['auth'])->prefix('profile')->group(function () {
 
-    Route::middleware('patient')->get('/orders', [App\Http\Controllers\Profile\OrdersController::class, 'ordersList'])
+    Route::middleware('patient')->get('/orders', [\App\Http\Controllers\Profile\Orders\OrdersController::class, 'index'])
         ->name('profile.orders.list');
+
+    Route::middleware('patient')->get('/orders/{orderId}', [\App\Http\Controllers\Profile\Orders\OrdersController::class, 'show'])
+        ->name('profile.orders.show');
+
+    Route::middleware('patient')->get('/orders/{orderId}/downloadMedicalCertificate',
+        [\App\Http\Controllers\Profile\Orders\OrdersController::class, 'downloadMedicalCertificate'])
+        ->name('profile.orders.downloadMedicalCertificate');
 
     Route::get('settings', [\App\Http\Controllers\Profile\SettingsController::class, 'settings'])
         ->name('profile.settings');
