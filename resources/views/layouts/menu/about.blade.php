@@ -1,19 +1,28 @@
 @extends('layouts.app')
 
+@section('css')
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/layouts/menu/about.css') }}">
+@endsection
+
 @section('content')
     <div class="container about" style="">
-        <div class="card text-center" style="width: 100%;">
+        <div class="card about_main_block">
             <div class="card-body">
-                <h5>
-                    <img src= {{ asset('storage/logos/largelogo.svg') }}>
-                </h5>
-                <h5 class="lead" style="font-size: 24px; color:#9e9e9e; font-weight: bold">Веб-сервис по оформлению
-                    медицинских справок</h5>
-                <hr class="my-4">
-                <div class="wrapper" style="justify-content: center">
-                    <ul style="font-size: 30px; color:#4c4c4c; display: block; list-style-image:url('../../../../storage/app/public/logos/check-circle.svg')">
+                <div class="about_main_block-logo">
+                    <h5>
+                        <img alt="logo" src={{ asset('storage/logos/largelogo.svg') }} >
+                    </h5>
+                </div>
+                <div class="about_main_block-logo-subtext d-flex justify-content-center">
+                    <h5 class="lead">Веб-сервис по оформлению
+                        медицинских справок</h5>
+                </div>
+
+                <hr class="my-4 about_main_block-line">
+                <div class="about_main_block-description d-flex justify-content-center">
+                    <ul style="list-style-image:url('{{ asset('storage/logos/check-circle.svg') }}')">
                         Наш сервис - это:
-                        <li>Легальное, быстрое и дистанционное оформление 4 медицинских справок</li>
+                        <li>Быстрое и дистанционное оформление медицинских справок</li>
                         <li>Проверка анализов высококвалифированными специалистами</li>
                         <li>Передовые технологии в медицинском обслуживании</li>
                     </ul>

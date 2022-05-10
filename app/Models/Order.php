@@ -67,10 +67,10 @@ class Order extends Model
 
     /** @var string[] */
     public const MAP_STEPS_BUTTON_COLOR = [
-        self::IN_PROGRESS_STATUS                => 'info',
-        self::COMPLETE_STATUS                   => 'success',
-        self::CANCEL_STATUS                     => 'warning',
-        self::ADDITIONAL_STEP_MAKE_MEDICAL_CERTIFICATE     => 'info',
+        self::IN_PROGRESS_STATUS                => 'primary',
+        self::COMPLETE_STATUS                   => 'primary',
+        self::CANCEL_STATUS                     => 'danger',
+        self::ADDITIONAL_STEP_MAKE_MEDICAL_CERTIFICATE     => 'primary',
     ];
 
     /** @var \string[][] */

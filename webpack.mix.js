@@ -21,4 +21,5 @@ mix.js('resources/js/app.js', 'public/js')
     .sass('resources/sass/layouts/menu/services.scss', 'public/css/layouts/menu/services.css')
     .sass('resources/sass/elements.scss', 'public/css/elements.css')
     .sass('resources/sass/layouts/admin/services/index.scss', 'public/css/layouts/admin/services/index.css')
-    .sass('resources/sass/layouts/admin/medical_certificates/index.scss', 'public/css/layouts/admin/medical_certificates/index.css');
+    .sass('resources/sass/layouts/admin/medical_certificates/index.scss', 'public/css/layouts/admin/medical_certificates/index.css')
+    .sass('resources/sass/layouts/menu/about.scss', 'public/css/layouts/menu/about.css');
