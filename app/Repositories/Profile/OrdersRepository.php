@@ -45,7 +45,7 @@ class OrdersRepository extends BaseRepository
             ->with([
                 'doctor',
                 'orderResult',
-                'service',
+                'service'  => fn($service) => $service->withTrashed(),
             ])
             ->findOrFail($orderId);
 
@@ -62,7 +62,7 @@ class OrdersRepository extends BaseRepository
         $order = $this->startCondition()
             ->with([
                 'orderResult',
-                'service',
+                'service'  => fn($service) => $service->withTrashed(),
             ])
             ->findOrFail($orderId);
 
