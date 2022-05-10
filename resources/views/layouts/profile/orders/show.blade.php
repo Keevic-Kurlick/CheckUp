@@ -42,7 +42,7 @@
                             <div class="card">
                                 @if ($hasApproveMessage)
                                     <div class="card-header">
-                                        <h6 class="card-title">Комментарий врача</h6>
+                                        <span>Комментарий врача</span>
                                     </div>
                                     <div class="card-body">
                                         {{ $order->orderResult->approve_message }}
