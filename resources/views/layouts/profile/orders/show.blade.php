@@ -3,7 +3,8 @@
      * @var \App\Models\Order $order
      */
 
-    $hasApproveMessage = !empty($order->orderResult?->approve_message);
+    $hasApproveMessage  = !empty($order->orderResult?->approve_message);
+    $hasCancelMessage   = !empty($order->orderResult?->cancel_message);
     $hasCertificatePath = !empty($order->orderResult?->certificate_path);
 @endphp
 
@@ -63,6 +64,20 @@
                                             Обратитесь в техническую поддержку.
                                         </p>
                                     @endif
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endif
+                @if($order->status == \App\Models\Order::CANCEL_STATUS)
+                    <div class="row mt-2">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <span>Причина отказа</span>
+                                </div>
+                                <div class="card-body">
+                                    {{ $order->orderResult->cancel_message }}
                                 </div>
                             </div>
                         </div>
