@@ -44,7 +44,7 @@
                         </div>
                         <div class="card-body">
                             <p> Услуга: {{ $order->service->name }}</p>
-                            <p> Доктор: {{ $order->doctor?->name ?? 'Не назначен' }}</p>
+                            <p> Врач: {{ $order->doctor?->name ?? 'Не назначен' }}</p>
                         </div>
                     </div>
                 </div>

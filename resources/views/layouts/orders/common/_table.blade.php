@@ -10,7 +10,7 @@
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">Услуга</th>
-                <th scope="col">Доктор</th>
+                <th scope="col">Врач</th>
                 <th scope="col">Статус</th>
                 <th scope="col">Создана</th>
                 <th scope="col">Обновлена</th>

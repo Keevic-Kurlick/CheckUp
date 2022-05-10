@@ -3,11 +3,12 @@
 @section('title', 'Dashboard')
 
 @section('content_header')
-    <h1>Dashboard</h1>
+    <h1>Админ панель</h1>
 @endsection
 
 @section('content')
-    <p>Welcome to this beautiful admin panel.</p>
+    <p> Добро пожаловать! </p>
+    <p> Это страница администраторов сервиса.</p>
 @endsection
 
 @section('css')
