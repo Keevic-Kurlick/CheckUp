@@ -66,7 +66,6 @@
                                     @can('hasAccessToDoctorOrders', \App\Models\User::class)
                                             <li><a class="dropdown-item" href="{{ route('orders.index') }}">Заказы</a></li>
                                     @endcan
-                                    <li><a class="dropdown-item" href="{{ route('profile.settings') }}">Настройки</a></li>
                                     <li><hr class="dropdown-divider"></li>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();

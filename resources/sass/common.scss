@@ -1,9 +1,35 @@
 .btn-primary {
-    &, &:hover, &:active, &:focus, &:focus-visible {
+    &, &:hover, &:active, &:focus, &:focus-visible, &:active:focus {
         background-color:#00C98D;
         border-color: #00C98D;
         color:white;
         font-weight: bold;
         outline: none;
+        box-shadow: none;
     }
 }
+
+.btn-info {
+    &, &:hover, &:active, &:focus, &:focus-visible, &:active:focus {
+        background-color:#93b1b8;
+        border-color: #93b1b8;
+        color:white;
+        font-weight: bold;
+        outline: none;
+        box-shadow: none;
+    }
+}
+
+.btn-danger {
+    &, &:hover, &:active, &:focus, &:focus-visible, &:active:focus {
+        background-color:#ff6554;
+        border-color: #ff6554;
+        color:white;
+        font-weight: bold;
+        outline: none;
+        box-shadow: none;
+    }
+}
+
+
+
