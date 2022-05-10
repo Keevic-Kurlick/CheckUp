@@ -45,9 +45,6 @@ Route::middleware(['auth'])->prefix('profile')->group(function () {
         [\App\Http\Controllers\Profile\Orders\OrdersController::class, 'downloadMedicalCertificate'])
         ->name('profile.orders.downloadMedicalCertificate');
 
-    Route::get('settings', [\App\Http\Controllers\Profile\SettingsController::class, 'settings'])
-        ->name('profile.settings');
-
     Route::middleware('patient')->get('documents', [\App\Http\Controllers\Profile\DocumentsController::class, 'profileDocuments'])
         ->name('profile.documents');
 
