@@ -13,7 +13,7 @@
 @section('content')
     <div class="container order_info">
         <div class="row justify-content-center">
-            <div class="col-12 col-md-6">
+            <div class="col-12 col-md-8 col-lg-6">
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
