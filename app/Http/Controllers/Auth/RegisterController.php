@@ -51,9 +51,17 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'name'                  => ['required', 'string', 'max:255'],
+            'email'                 => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password'              => ['required', 'string', 'min:8', 'confirmed'],
+            'agree-user-policy'     => ['accepted'],
+            'agree-privacy-policy'  => ['accepted'],
+        ])->setAttributeNames([
+            'name'                  => 'ФИО',
+            'email'                 => 'E-mail',
+            'password'              => 'пароль',
+            'agree-user-policy'     => 'Пользовательское соглашение',
+            'agree-privacy-policy'  => 'Политику конфиденциальности',
         ]);
     }
 

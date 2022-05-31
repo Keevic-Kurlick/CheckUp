@@ -62,6 +62,32 @@
                                 </div>
                             </div>
 
+                            <div class="mb-3">
+                                <div class="form-check">
+                                    <input class="form-check-input"
+                                           type="checkbox"
+                                           name="agree-user-policy"
+                                           id="agree-user-policy">
+                                    <label class="form-check-label" for="agree-user-policy">
+                                        Я принимаю <a href="">Пользовательское соглашение</a>
+                                    </label>
+                                </div>
+
+                                <x-show-error field-name="agree-user-policy" />
+
+                                <div class="form-check">
+                                    <input class="form-check-input"
+                                           type="checkbox"
+                                           name="agree-privacy-policy"
+                                           id="agree-privacy-policy">
+                                    <label class="form-check-label" for="agree-privacy-policy">
+                                        Я принимаю <a href="">Политику конфиденциальности</a>
+                                    </label>
+                                </div>
+
+                                <x-show-error field-name="agree-privacy-policy" />
+                            </div>
+
                             <div class="row mb-0" style = "justify-content: center">
                                 <div class="col-md-6 d-flex justify-content-center">
                                     <button type="submit" class="btn btn-primary" style = "align-content: center; background-color:#00C98D; color:white; font-size: 18px; font-weight: bold">
