@@ -2,6 +2,7 @@
 
 namespace App\Policies;
 
+use App\Models\PatientInformation;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
@@ -33,7 +34,9 @@ class UserPolicy
     {
         $response = false;
 
-        if (!empty($user)) {
+        if (!empty($user)
+            && $user?->patientInformation?->check_status === PatientInformation::CHECK_STATUS_CONFIRMED
+        ) {
             $response = true;
         }
 

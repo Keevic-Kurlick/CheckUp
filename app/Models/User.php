@@ -11,6 +11,8 @@ use Laravel\Sanctum\HasApiTokens;
 /**
  * @property int $id
  * @property string $name
+ * @property Role $role
+ * @property PatientInformation $patientInformation
  * @method static whereId(int $id)
  */
 class User extends Authenticatable
