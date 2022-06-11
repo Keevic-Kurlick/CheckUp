@@ -89,12 +89,22 @@ return [
                 'error'     => 'При удалении справки произошла ошибка.',
             ],
             'medical_certificate_not_found' => 'Справка не найдена.',
-        ]
+        ],
+        'check_documents' => [
+            'user_not_found' => 'Пациент не найден.',
+        ],
     ],
     'check_documents' => [
+        'titles' => [
+             'edit' => 'Подтвердить документы',
+        ],
         'pages' => [
-            'index' => [
-
+            'edit' => [
+                'passport_series'   => 'Серия паспорта',
+                'passport_number'   => 'Номер паспорта',
+                'inn'               => 'ИНН',
+                'snils'             => 'СНИЛС',
+                'btn_confirm'       => 'Подтвердить',
             ]
         ]
     ],

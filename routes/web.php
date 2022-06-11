@@ -97,6 +97,9 @@ Route::name('admin.')->prefix('admin')->middleware('admin')->group(function() {
     Route::get('/users/documents/check/{id}', [\App\Http\Controllers\Admin\Users\Documents\Check\CheckDocumentsController::class, 'edit'])
         ->name('users.documents.check.edit');
 
+    Route::get('/users/documents/check/{id}/confirm', [\App\Http\Controllers\Admin\Users\Documents\Check\CheckDocumentsController::class, 'confirm'])
+        ->name('users.documents.check.confirm');
+
     Route::get('/services', [\App\Http\Controllers\Admin\Services\ServicesController::class, 'index'])
         ->name('services');
 

@@ -29,11 +29,22 @@ class CheckDocumentsController extends Controller
     }
 
     /**
-     * @param int $id
-     * @return void
+     * @method GET
+     * @param int $userId
+     * @return \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\Contracts\Foundation\Application
      */
-    public function edit($id)
+    public function edit($userId): \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\Contracts\Foundation\Application
     {
+        try {
+            $user = $this->userRepository->getUserToConfirmDocuments($userId);
+        } catch(\Exception $e) {
 
+            $notifyMessage = __('admin.notifications.check_documents.user_not_found');
+            $this->toastr->error($notifyMessage);
+
+            return redirect()->back();
+        }
+
+        return view('admin.documents.check_documents.edit', compact('user'));
     }
 }

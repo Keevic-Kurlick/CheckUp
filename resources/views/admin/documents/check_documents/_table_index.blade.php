@@ -9,7 +9,7 @@
         <tr>
             <th scope="col">ФИО</th>
             <th scope="col">Email</th>
-            <th scope="col">Дата последнего изменения</th>
+            <th scope="col">Изменено</th>
         </tr>
         </thead>
         <tbody>

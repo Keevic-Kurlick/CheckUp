@@ -70,6 +70,19 @@ class UserRepository extends BaseRepository
     }
 
     /**
+     * @param int $userId
+     * @return Model
+     */
+    public function getUserToConfirmDocuments(int $userId): Model
+    {
+        $user = $this->startCondition()
+            ->with(['patientInformation'])
+            ->findOrFail($userId);
+
+        return $user;
+    }
+
+    /**
      * @return string
      */
     protected function getModelClass(): string
