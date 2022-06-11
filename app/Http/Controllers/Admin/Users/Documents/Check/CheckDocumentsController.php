@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Admin\Users\Documents\Check;
 
+use App\Http\Controllers\Admin\Users\Documents\Check\Exceptions\PatientDocumentsAlreadyCheckedException;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\Users\Documents\ConfirmDocumentsRequest;
 use App\Repositories\UserRepository;
 use Yoeunes\Toastr\Toastr;
 
@@ -11,10 +13,12 @@ class CheckDocumentsController extends Controller
     /**
      * @param UserRepository $userRepository
      * @param Toastr $toastr
+     * @param CheckDocumentsManager $checkDocumentsManager
      */
     public function __construct(
         private UserRepository $userRepository,
-        private Toastr $toastr
+        private Toastr $toastr,
+        private CheckDocumentsManager $checkDocumentsManager
     ){}
 
     /**
@@ -46,5 +50,37 @@ class CheckDocumentsController extends Controller
         }
 
         return view('admin.documents.check_documents.edit', compact('user'));
+    }
+
+    /**
+     * @method PATCH
+     * @param ConfirmDocumentsRequest $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function confirm(ConfirmDocumentsRequest $request)
+    {
+        $result = redirect()->route('admin.users.documents.check');
+
+        $notifyMessage = __('admin.notifications.check_documents.confirmed_success');
+        $notifyType = 'success';
+
+        try {
+            $this->checkDocumentsManager->confirmDocuments($request);
+        } catch(PatientDocumentsAlreadyCheckedException $e) {
+            $notifyMessage = __('admin.notifications.check_documents.documents_already_confirmed');
+
+            $notifyType = 'error';
+
+        } catch (\Exception $e) {
+            $notifyMessage = __('admin.notifications.check_documents.some_confirmed_error');
+
+            $notifyType = 'error';
+
+            $result = redirect()->back();
+        }
+
+        $this->toastr->$notifyType($notifyMessage);
+
+        return $result;
     }
 }

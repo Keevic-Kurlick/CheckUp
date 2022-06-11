@@ -15,6 +15,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property string $check_status
  * @property int    $patient_id
  * @method static whereId(int $id)
+ * @method static wherePatientId(int $patientId)
  * @method void needConfirm(Builder $query)
  */
 class PatientInformation extends Model
@@ -42,7 +43,8 @@ class PatientInformation extends Model
         'passport_series',
         'passport_number',
         'inn',
-        'snils'
+        'snils',
+        'check_status',
     ];
 
     /** @var string */

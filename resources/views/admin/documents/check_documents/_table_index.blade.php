@@ -29,7 +29,7 @@
             </tr>
         @empty
             <tr class="empty-table-data">
-                <td colspan="2">Нет данных</td>
+                <td colspan="3">Нет данных</td>
             </tr>
         @endforelse
         </tbody>

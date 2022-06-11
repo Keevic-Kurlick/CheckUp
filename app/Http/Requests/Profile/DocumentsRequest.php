@@ -4,6 +4,12 @@ namespace App\Http\Requests\Profile;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ * @property-read string $passport_series
+ * @property-read string $passport_number
+ * @property-read string $patient_inn
+ * @property-read string $patient_snils
+ */
 class DocumentsRequest extends FormRequest
 {
     /**
@@ -17,7 +23,7 @@ class DocumentsRequest extends FormRequest
     /**
      * @return array
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             'passport_series' => 'required|string|size:4',

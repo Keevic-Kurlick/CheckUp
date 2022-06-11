@@ -91,7 +91,10 @@ return [
             'medical_certificate_not_found' => 'Справка не найдена.',
         ],
         'check_documents' => [
-            'user_not_found' => 'Пациент не найден.',
+            'user_not_found'                => 'Пациент не найден.',
+            'documents_already_confirmed'   => 'Документы пациента уже подтверждены.',
+            'some_confirmed_error'          => 'При подтверждении произошла ошибка.',
+            'confirmed_success'             => 'Документы успешно подтверждены.',
         ],
     ],
     'check_documents' => [
@@ -105,7 +108,7 @@ return [
                 'inn'               => 'ИНН',
                 'snils'             => 'СНИЛС',
                 'btn_confirm'       => 'Подтвердить',
-            ]
+            ],
         ]
     ],
 ];
