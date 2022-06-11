@@ -91,6 +91,15 @@ Route::name('admin.')->prefix('admin')->middleware('admin')->group(function() {
     Route::post('/users/roles/edit', [\App\Http\Controllers\Admin\Users\Roles\RoleController::class, 'editRoles'])
         ->name('users.roles.edit');
 
+    Route::get('/users/documents/check', [\App\Http\Controllers\Admin\Users\Documents\Check\CheckDocumentsController::class, 'index'])
+        ->name('users.documents.check');
+
+    Route::get('/users/documents/check/{id}', [\App\Http\Controllers\Admin\Users\Documents\Check\CheckDocumentsController::class, 'edit'])
+        ->name('users.documents.check.edit');
+
+    Route::patch('/users/documents/check/{id}/confirm', [\App\Http\Controllers\Admin\Users\Documents\Check\CheckDocumentsController::class, 'confirm'])
+        ->name('users.documents.check.confirm');
+
     Route::get('/services', [\App\Http\Controllers\Admin\Services\ServicesController::class, 'index'])
         ->name('services');
 

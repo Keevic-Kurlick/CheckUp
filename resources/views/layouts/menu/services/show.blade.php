@@ -16,15 +16,43 @@
     <div class = "container" style="margin-bottom: 180px; align-content:center;justify-content: space-between">
         <div class = "row">
             @cannot('hasAccessToOrderService', \App\Models\User::class)
-                <div class="col-12">
-                    <div class="alert alert-info alert-dismissible fade show" role="alert">
-                        Для оформления медицинской справки, необходимо
-                        <a href="{{ route('login') }}" class="alert-link">
-                            авторизоваться
-                        </a>
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                @guest
+                    <div class="col-12">
+                        <div class="alert alert-info alert-dismissible fade show" role="alert">
+                            Для оформления медицинской справки, необходимо
+                            <a href="{{ route('login') }}" class="alert-link">
+                                авторизоваться
+                            </a>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
                     </div>
-                </div>
+                @endguest
+
+                @auth
+                    @if($user->patientInformation?->check_status === \App\Models\PatientInformation::CHECK_STATUS_NEED_CONFIRM)
+                        <div class="col-12">
+                            <div class="alert alert-info alert-dismissible fade show" role="alert">
+                                <span>
+                                    Для оформления медицинской справки необходимо обратиться в медицинскую организацию
+                                    для подтверждения данных Ваших документов.
+                                </span>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        </div>
+                    @endif
+
+                    @empty($user->patientInformation)
+                        <div class="col-12">
+                            <div class="alert alert-info alert-dismissible fade show" role="alert">
+                            <span>
+                                Для оформления медицинской справки необходимо заполнить данные
+                                в разделе &#171;Документы&#187;.
+                            </span>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        </div>
+                    @endempty
+                @endauth
             @endcannot
             <div class="col-sm-12
                     @can('hasAccessToOrderService', \App\Models\User::class)
@@ -59,7 +87,9 @@
                                            id="passport_series"
                                            placeholder="Серия паспорта"
                                            value="{{ old('passport_series', $user?->patientInformation?->passport_series ?? null)  }}"
-                                           name="passport_series">
+                                           name="passport_series"
+                                           readonly
+                                    >
 
                                     <x-show-error field-name="passport_series" />
                                 </div>
@@ -73,7 +103,9 @@
                                            id="passport_number"
                                            placeholder="Номер паспорта"
                                            value="{{ old('passport_number', $user?->patientInformation?->passport_number ?? null)  }}"
-                                           name="passport_number">
+                                           name="passport_number"
+                                           readonly
+                                    >
 
                                     <x-show-error field-name="passport_number" />
                                 </div>
@@ -88,6 +120,7 @@
                                            placeholder="ИНН"
                                            value="{{ old('patient_inn', $user?->patientInformation?->inn ?? null)  }}"
                                            name="patient_inn"
+                                           readonly
                                     >
 
                                     <x-show-error field-name="patient_inn" />
@@ -102,7 +135,9 @@
                                            id="patient_snils"
                                            placeholder="СНИЛС"
                                            value="{{ old('patient_snils', $user?->patientInformation?->snils ?? null)  }}"
-                                           name="patient_snils">
+                                           name="patient_snils"
+                                           readonly
+                                    >
                                 </div>
 
                                 <x-show-error field-name="patient_snils" />
@@ -113,6 +148,7 @@
                                 <input type="file" class="form-control-file"
                                        name="patient_passport_scan" id="patient_passport_scan"
                                        value="{{ old('patient_passport_scan') ?? null }}">
+
                                 <x-show-error field-name="patient_passport_scan" />
                             </div>
 
@@ -121,6 +157,7 @@
                                 <input type="file" class="form-control-file"
                                        name="patient_analysis_scan" id="patient_analysis_scan"
                                        value="{{ old('patient_analysis_scan') ?? null }}">
+
                                 <x-show-error field-name="patient_analysis_scan" />
                             </div>
                         </div>

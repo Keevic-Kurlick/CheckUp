@@ -7,6 +7,7 @@ return [
         'assign_user_role'      => 'Изменить роль',
         'services'              => 'Услуги',
         'medical_certificates'  => 'Справки',
+        'check_documents'       => 'Проверка данных пациента',
     ],
     'services' => [
         'titles' => [
@@ -88,6 +89,26 @@ return [
                 'error'     => 'При удалении справки произошла ошибка.',
             ],
             'medical_certificate_not_found' => 'Справка не найдена.',
+        ],
+        'check_documents' => [
+            'user_not_found'                => 'Пациент не найден.',
+            'documents_already_confirmed'   => 'Документы пациента уже подтверждены.',
+            'some_confirmed_error'          => 'При подтверждении произошла ошибка.',
+            'confirmed_success'             => 'Документы успешно подтверждены.',
+        ],
+    ],
+    'check_documents' => [
+        'titles' => [
+             'edit' => 'Подтвердить документы',
+        ],
+        'pages' => [
+            'edit' => [
+                'passport_series'   => 'Серия паспорта',
+                'passport_number'   => 'Номер паспорта',
+                'inn'               => 'ИНН',
+                'snils'             => 'СНИЛС',
+                'btn_confirm'       => 'Подтвердить',
+            ],
         ]
     ],
 ];
