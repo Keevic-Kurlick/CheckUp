@@ -7,6 +7,7 @@ return [
         'assign_user_role'      => 'Изменить роль',
         'services'              => 'Услуги',
         'medical_certificates'  => 'Справки',
+        'check_documents'       => 'Проверка данных пациента',
     ],
     'services' => [
         'titles' => [
@@ -88,6 +89,13 @@ return [
                 'error'     => 'При удалении справки произошла ошибка.',
             ],
             'medical_certificate_not_found' => 'Справка не найдена.',
+        ]
+    ],
+    'check_documents' => [
+        'pages' => [
+            'index' => [
+
+            ]
         ]
     ],
 ];

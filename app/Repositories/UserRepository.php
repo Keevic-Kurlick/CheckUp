@@ -2,7 +2,7 @@
 
 namespace App\Repositories;
 
-use App\Models\User;
+use App\Models\PatientInformation;
 use App\Models\User as Model;
 
 class UserRepository extends BaseRepository
@@ -22,7 +22,7 @@ class UserRepository extends BaseRepository
 
     /**
      * @param int[] $ids
-     * @return \Illuminate\Support\Collection<User>
+     * @return \Illuminate\Support\Collection<Model>
      */
     public function getUsersByIds(array $ids): \Illuminate\Support\Collection
     {
@@ -48,12 +48,32 @@ class UserRepository extends BaseRepository
     }
 
     /**
+     * @return mixed
+     */
+    public function getUserWithNeedConfirmDocuments(): mixed
+    {
+        $users = $this->startCondition()
+            ->selectRaw('users.id, users.name, users.email, pi.updated_at')
+            ->patient()
+            ->join(
+                'patient_information as pi',
+                'users.patientinfo_id',
+                '=',
+                'pi.id'
+            )->where(
+                'pi.check_status',
+                '=',
+                PatientInformation::CHECK_STATUS_NEED_CONFIRM
+            )->paginate();
+
+        return $users;
+    }
+
+    /**
      * @return string
      */
     protected function getModelClass(): string
     {
         return Model::class;
     }
-
-
 }

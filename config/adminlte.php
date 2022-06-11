@@ -255,6 +255,11 @@ return [
             ],
         ],
         [
+            'text'  => 'user_documents',
+            'icon'  => 'fas fa-file-medical',
+            'url'   => 'admin/users/documents/check',
+        ],
+        [
             'text'  => 'services',
             'icon'  => 'fas fa-file-medical',
             'url'   => '/admin/services',

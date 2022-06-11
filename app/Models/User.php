@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -11,6 +12,7 @@ use Laravel\Sanctum\HasApiTokens;
 /**
  * @property int $id
  * @property string $name
+ * @property string $email
  * @property Role $role
  * @property PatientInformation $patientInformation
  * @method static whereId(int $id)
@@ -50,6 +52,16 @@ class User extends Authenticatable
     public function role(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(Role::class);
+    }
+
+    /**
+     * @param Builder $query
+     * @return Builder
+     */
+    public function scopePatient(Builder $query): Builder
+    {
+        return $query->join('roles', 'users.role_id', '=', 'roles.id')
+            ->where('roles.name', Role::ROLE_PATIENT);
     }
 
     /**
