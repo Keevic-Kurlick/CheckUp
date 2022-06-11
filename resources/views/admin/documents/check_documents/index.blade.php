@@ -16,6 +16,7 @@
 
 @section('content')
     <div class="container">
+        @include('admin.documents.check_documents._filter_index')
         @include('admin.documents.check_documents._table_index')
     </div>
 @endsection

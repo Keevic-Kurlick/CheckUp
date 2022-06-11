@@ -2,8 +2,10 @@
 
 namespace App\Repositories;
 
+use App\Http\Requests\Admin\Users\Documents\IndexCheckDocumentsRequest;
 use App\Models\PatientInformation;
 use App\Models\User as Model;
+use Illuminate\Database\Eloquent\Builder;
 
 class UserRepository extends BaseRepository
 {
@@ -48,10 +50,13 @@ class UserRepository extends BaseRepository
     }
 
     /**
+     * @param IndexCheckDocumentsRequest $request
      * @return mixed
      */
-    public function getUserWithNeedConfirmDocuments(): mixed
+    public function getUserWithNeedConfirmDocuments(IndexCheckDocumentsRequest $request): mixed
     {
+        $patientName = $request->patientName;
+
         $users = $this->startCondition()
             ->selectRaw('users.id, users.name, users.email, pi.updated_at')
             ->patient()
@@ -64,7 +69,10 @@ class UserRepository extends BaseRepository
                 'pi.check_status',
                 '=',
                 PatientInformation::CHECK_STATUS_NEED_CONFIRM
-            )->paginate();
+            )->when(!empty($patientName), function (Builder $query) use ($patientName) {
+                return $query->where('users.name', 'like', "%$patientName%");
+            })
+            ->paginate();
 
         return $users;
     }

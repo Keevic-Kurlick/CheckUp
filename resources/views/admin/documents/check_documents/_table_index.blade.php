@@ -3,7 +3,7 @@
      * @var \App\Models\User $users
      */
 @endphp
-<div class="users_table">
+<div class="users_table overflow-auto">
     <table class="table mt-3 table">
         <thead>
         <tr>

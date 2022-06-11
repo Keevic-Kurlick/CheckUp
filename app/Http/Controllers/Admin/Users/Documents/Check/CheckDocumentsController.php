@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin\Users\Documents\Check;
 use App\Http\Controllers\Admin\Users\Documents\Check\Exceptions\PatientDocumentsAlreadyCheckedException;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Users\Documents\ConfirmDocumentsRequest;
+use App\Http\Requests\Admin\Users\Documents\IndexCheckDocumentsRequest;
 use App\Repositories\UserRepository;
 use Yoeunes\Toastr\Toastr;
 
@@ -25,9 +26,9 @@ class CheckDocumentsController extends Controller
      * @method GET
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application
      */
-    public function index(): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application
+    public function index(IndexCheckDocumentsRequest $request): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application
     {
-        $users = $this->userRepository->getUserWithNeedConfirmDocuments();
+        $users = $this->userRepository->getUserWithNeedConfirmDocuments($request);
 
         return view('admin.documents.check_documents.index', compact('users'));
     }
